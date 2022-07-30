@@ -54,6 +54,7 @@ public class ModuleManager extends Manager<Module> {
         modules.add(new MiddleClick());
         modules.add(new Rubberband());
         modules.add(new XCarry());
+        modules.add(new AntiLog4j());
 
         // player
         modules.add(new FastPlace());
