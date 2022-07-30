@@ -12,10 +12,7 @@ import com.evo.core.features.module.combat.*;
 import com.evo.core.features.module.movement.*;
 import com.evo.core.features.module.other.*;
 import com.evo.core.features.module.player.*;
-import com.evo.core.features.module.render.CameraClip;
-import com.evo.core.features.module.render.ESP;
-import com.evo.core.features.module.render.Fullbright;
-import com.evo.core.features.module.render.Nametags;
+import com.evo.core.features.module.render.*;
 import com.evo.core.manager.Manager;
 
 public class ModuleManager extends Manager<Module> {
@@ -71,6 +68,7 @@ public class ModuleManager extends Manager<Module> {
         modules.add(new ESP());
         modules.add(new Fullbright());
         modules.add(new Nametags());
+        modules.add(new SuperHeroFX());
 
         LOGGER.info("Loaded {} modules.", modules.size());
 
