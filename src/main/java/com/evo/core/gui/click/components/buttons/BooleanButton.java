@@ -2,6 +2,7 @@ package com.evo.core.gui.click.components.buttons;
 
 import static com.evo.core.gui.click.components.buttons.ModuleButton.BACKGROUND;
 
+import com.evo.core.features.module.client.ClickGUI;
 import com.evo.core.gui.base.AbstractButton;
 import com.evo.core.setting.Setting;
 import com.evo.util.render.RenderUtil;
@@ -12,7 +13,7 @@ import java.awt.*;
 public class BooleanButton extends AbstractButton {
     protected final Setting<Boolean> setting;
 
-    public static final Color ENABLED = new Color(0, 255, 0, 255);
+    public static final Color ENABLED = new Color(ClickGUI.enabledR.getValue(), ClickGUI.enabledG.getValue(), ClickGUI.enabledB.getValue(), ClickGUI.enabledAl.getValue());
 
     public BooleanButton(Setting<Boolean> setting) {
         super(setting.getName());

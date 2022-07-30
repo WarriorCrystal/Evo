@@ -25,6 +25,17 @@ public class ClickGUI extends Module {
     public static final Setting<Background> background = new Setting<>("Background", Background.BLUR);
     public static final Setting<Double> intensity = new Setting<>(background, "Intensity", 7.0, 1.0, 15.0);
 
+    public static final Setting<Boolean> enabledColor = new Setting<>("Toggle Color", true);
+    public static final Setting<Integer> enabledR = new Setting<>(enabledColor, "R", 0, 0, 255);
+    public static final Setting<Integer> enabledG = new Setting<>(enabledColor, "G", 255, 0, 255);
+    public static final Setting<Integer> enabledB = new Setting<>(enabledColor, "B", 0, 0, 255);
+    public static final Setting<Integer> enabledAl = new Setting<>(enabledColor, "Alpha", 220, 0, 255);
+    public static final Setting<Boolean> backgroundColor = new Setting<>("Background Color", true);
+    public static final Setting<Integer> backgroundR = new Setting<>(backgroundColor, "R", 255, 0, 255);
+    public static final Setting<Integer> backgroundG = new Setting<>(backgroundColor, "G", 0, 0, 255);
+    public static final Setting<Integer> backgroundB = new Setting<>(backgroundColor, "B", 0, 0, 255);
+    public static final Setting<Integer> backgroundAl = new Setting<>(backgroundColor, "Alpha", 220, 0, 255);
+
     @Override
     protected void onEnable() {
         if (nullCheck()) {

@@ -63,7 +63,6 @@ public abstract class Frame extends AbstractComponent {
 
         // draw header
         RenderUtil.drawRectangle(x, y, width, headerHeight, HEADER);
-        RenderUtil.drawOutline(x, y, width, expanded ? height : headerHeight, 3.0f, new Color(20, 20, 20).getRGB());
         getEvo().getFontManager().drawNormalizedString(name, (float) ScaleUtil.alignV(name, x, width), (float) ScaleUtil.alignH(y, headerHeight), -1);
 
         // scissor elements so they are cleanly restricted within the frame

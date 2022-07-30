@@ -3,6 +3,7 @@ package com.evo.core.gui.click.components.buttons;
 import java.awt.*;
 
 import com.evo.core.features.module.Module;
+import com.evo.core.features.module.client.ClickGUI;
 import com.evo.core.gui.base.AbstractButton;
 import com.evo.core.gui.base.AbstractComponent;
 import com.evo.core.gui.click.components.other.DropdownMenu;
@@ -12,8 +13,8 @@ import com.evo.util.render.RenderUtil;
 import com.evo.util.render.ScaleUtil;
 
 public class ModuleButton extends AbstractButton {
-    public static final Color BACKGROUND = new Color(20, 19, 19, 208);
-    public static final Color ENABLED = new Color(0, 255, 0, 255);
+    public static final Color BACKGROUND = new Color(ClickGUI.backgroundR.getValue(), ClickGUI.backgroundG.getValue(), ClickGUI.backgroundB.getValue(), ClickGUI.backgroundAl.getValue());
+    public static final Color ENABLED = new Color(ClickGUI.enabledR.getValue(), ClickGUI.enabledG.getValue(), ClickGUI.enabledB.getValue(), ClickGUI.enabledAl.getValue());
 
     private final Module module;
 
