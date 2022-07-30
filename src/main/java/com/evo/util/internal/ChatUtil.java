@@ -4,7 +4,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.util.text.TextComponentString;
 
 public class ChatUtil implements Wrapper {
-    public static final String PREFIX = ChatFormatting.AQUA + "Evo" + ChatFormatting.GRAY + ">"  + ChatFormatting.RESET + "";
+    public static final String PREFIX = ChatFormatting.AQUA + "Evo " + ChatFormatting.GRAY + "> "  + ChatFormatting.RESET + "";
 
     /**
      * Sends a non-prefixed message

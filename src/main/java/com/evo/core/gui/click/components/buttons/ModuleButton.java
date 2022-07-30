@@ -13,6 +13,7 @@ import com.evo.util.render.ScaleUtil;
 
 public class ModuleButton extends AbstractButton {
     public static final Color BACKGROUND = new Color(20, 19, 19, 208);
+    public static final Color ENABLED = new Color(0, 255, 0, 255);
 
     private final Module module;
 
@@ -46,7 +47,7 @@ public class ModuleButton extends AbstractButton {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        RenderUtil.drawRectangle(x, y, width, height, module.isToggled() ? BACKGROUND.darker().darker().getRGB() : BACKGROUND.getRGB());
+        RenderUtil.drawRectangle(x, y, width, height, module.isToggled() ? ENABLED.getRGB() : BACKGROUND.getRGB());
         getEvo().getFontManager().drawNormalizedString(name, (float) (x + 3.0), (float) ScaleUtil.alignH(y, height), -1);
 
         if (module.getSettings().size() > 2) {

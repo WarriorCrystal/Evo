@@ -7,8 +7,12 @@ import com.evo.core.setting.Setting;
 import com.evo.util.render.RenderUtil;
 import com.evo.util.render.ScaleUtil;
 
+import java.awt.*;
+
 public class BooleanButton extends AbstractButton {
     protected final Setting<Boolean> setting;
+
+    public static final Color ENABLED = new Color(0, 255, 0, 255);
 
     public BooleanButton(Setting<Boolean> setting) {
         super(setting.getName());
@@ -18,7 +22,7 @@ public class BooleanButton extends AbstractButton {
 
     @Override
     public void render(int mouseX, int mouseY) {
-        RenderUtil.drawRectangle(x, y, width, height, setting.getValue() ? BACKGROUND.darker().darker().getRGB() : BACKGROUND.getRGB());
+        RenderUtil.drawRectangle(x, y, width, height, setting.getValue() ? ENABLED.getRGB() : BACKGROUND.getRGB());
         getEvo().getFontManager().drawNormalizedString(name, (float) (x + 3.0), (float) ScaleUtil.alignH(y, height), -1);
     }
 

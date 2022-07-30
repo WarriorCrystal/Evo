@@ -71,7 +71,6 @@ public abstract class Frame extends AbstractComponent {
 
         // if opened, we'll render our drawer (?)
         if (expanded) {
-            RenderUtil.drawRectangle(x, y + headerHeight, width, height - headerHeight, BACKGROUND);
 
             double startY = 0.0;
             if (children.get(0).getY() == 0.0) {

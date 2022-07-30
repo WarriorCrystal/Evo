@@ -69,6 +69,7 @@ public class ModuleManager extends Manager<Module> {
         modules.add(new Fullbright());
         modules.add(new Nametags());
         modules.add(new SuperHeroFX());
+        modules.add(new ThunderKill());
 
         LOGGER.info("Loaded {} modules.", modules.size());
 
