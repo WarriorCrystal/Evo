@@ -30,9 +30,9 @@ apply plugin: 'org.spongepowered.mixin'
 // The jar version number that will be output when building.
 version = '2.0.0-beta'
 // https://maven.apache.org/guides/mini/guide-naming-conventions.html
-group = 'cope.inferno'
+group = 'com.evo'
 // The jar name that will be output when building.
-archivesBaseName = 'Inferno'
+archivesBaseName = 'Evo'
 
 // Need this here so eclipse task generates correctly.
 sourceCompatibility = targetCompatibility = '1.8'
@@ -53,9 +53,9 @@ minecraft {
     // An Srg named sources jar is made by default. No point for it aka bloat so it has been disabled.
     makeObfSourceJar = false
     // Tells FML to load our mixin loader in IDE's.
-    clientJvmArgs += '-Dfml.coreMods.load=cope.inferno.asm.MixinLoader'
+    clientJvmArgs += '-Dfml.coreMods.load=com.evo.asm.MixinLoader'
     // Tells mixin to use our mixin config in IDE's.
-    clientRunArgs += '--mixin mixins.inferno.json'
+    clientRunArgs += '--mixin mixins.evo.json'
 }
 
 mixin {
@@ -64,7 +64,7 @@ mixin {
     // Sets the main sourceSets refmap name instead of add sourceSets.main so there is no conflict cause of it adding another value instead of setting the 1 value.
     sourceSets {
         main {
-            ext.refMap = 'mixins.inferno.refmap.json'
+            ext.refMap = 'mixins.evo.refmap.json'
         }
     }
 }
@@ -130,18 +130,18 @@ jar {
     }
     manifest.attributes(
             // Name for the clients mixins.json.
-            'MixinConfigs': 'mixins.inferno.json',
+            'MixinConfigs': 'mixins.evo.json',
             // access transformers
-            'FMLAT': 'inferno_at.cfg',
+            'FMLAT': 'evo_at.cfg',
             // Directory for the org library mixin loader.
             'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
             // Actually not too sure what this is for.
             'TweakOrder': 0,
             // Directory for the mixin loader for the built jar.
-            'FMLCorePlugin': 'cope.inferno.asm.MixinLoader',
+            'FMLCorePlugin': 'com.evo.asm.MixinLoader',
             // Turn this to false for the client to be able to load in a IDE.
             'ForceLoadAsMod': 'true',
             // main class
-            'Main-Class': 'cope.inferno.core.Main'
+            'Main-Class': 'com.evo.core.Main'
     )
 }
