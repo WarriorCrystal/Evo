@@ -47,7 +47,8 @@ public class SuperHeroFX extends Module {
 
     @Override
     public void onUpdate() {
-
+        this.popTexts.removeIf(PopupText::isMarked);
+        this.popTexts.forEach(PopupText::Update);
     }
 
     @SubscribeEvent
@@ -117,7 +118,7 @@ public class SuperHeroFX extends Module {
     }
 
     @Override
-    public void onRender3D() {
+    public void onRender2D() {
         mc.getRenderManager();
         if (mc.getRenderManager().options != null) {
 
