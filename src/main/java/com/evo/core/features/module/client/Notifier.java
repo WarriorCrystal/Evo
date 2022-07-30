@@ -77,7 +77,7 @@ public class Notifier extends Module {
     @SubscribeEvent
     public void onPotionAdd(PotionEvent.PotionAddedEvent event) {
         if (strength.getValue() && event.getPotionEffect().getPotion().equals(MobEffects.STRENGTH)) {
-            ChatUtil.sendPrefixed(event.getEntity().getName() + " has strength!");
+            ChatUtil.sendPrefixed(event.getEntity().getName() + " has " + ChatFormatting.RED + "Strength");
         }
 
         if (weakness.getValue() && event.getPotionEffect().getPotion().equals(MobEffects.WEAKNESS) && event.getEntity().equals(mc.player)) {
@@ -88,11 +88,11 @@ public class Notifier extends Module {
     @SubscribeEvent
     public void onPotionRemove(PotionEvent.PotionRemoveEvent event) {
         if (strength.getValue() && event.getPotion().equals(MobEffects.STRENGTH)) {
-            ChatUtil.sendPrefixed(event.getEntity().getName() + " no longer has strength!");
+            ChatUtil.sendPrefixed(event.getEntity().getName() + " no longer has " + ChatFormatting.RED + "Strength");
         }
 
         if (weakness.getValue() && event.getPotion().equals(MobEffects.WEAKNESS) && event.getEntity().equals(mc.player)) {
-            ChatUtil.sendPrefixed("You no longer have weakness!");
+            ChatUtil.sendPrefixed("You no longer have " + ChatFormatting.GRAY + "Weakness");
         }
     }
 }
