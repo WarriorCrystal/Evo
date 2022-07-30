@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "priority": 2147483647,
+  "mixinPriority": 2147483647,
+  "minVersion": "0.7-SNAPSHOT",
+  "compatibilityLevel": "JAVA_8",
+  "package": "cope.inferno.asm.impl",
+  "refmap": "mixins.inferno.refmap.json",
+  "verbose": true,
+  "mixins": [
+    "entity.player.MixinEntityPlayer",
+    "entity.player.MixinEntityPlayerSP",
+    "entity.MixinEntity",
+
+    "input.MixinKeyBinding",
+    "input.MixinPlayerControllerMP",
+
+    "network.MixinNetHandlerPlayClient",
+    "network.MixinNettyCompressionDecoder",
+    "network.MixinNetworkManager",
+
+    "other.MixinScreenshotHelper",
+
+    "render.gui.MixinGuiNewChat",
+    "render.MixinEntityRenderer",
+    "render.MixinRenderLivingBase",
+    "render.MixinRenderPlayer",
+    "render.MixinTileEntityRendererDispatcher",
+
+    "world.block.MixinBlockLiquid",
+    "world.block.MixinBlockSlime",
+    "world.block.MixinBlockSoulSand",
+    "world.block.MixinStateImplementation",
+
+    "MixinMinecraft"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  }
+}
