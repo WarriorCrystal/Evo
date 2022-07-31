@@ -31,17 +31,17 @@ public class TotemPopCounter extends Module {
                     players.forEach((ent, count) -> {
                         if(!entity.isDead) {
                             players.put(ent, count + 1);
-                            Command.sendClientMessage(ChatFormatting.GREEN + ent.getName() + ChatFormatting.RESET + " just popped " + ChatFormatting.GREEN + count + ChatFormatting.RESET + " totems!");
+                            Command.sendClientMessage(ent.getName() + ChatFormatting.RESET + " popped " + ChatFormatting.RED + count + ChatFormatting.RESET + " totems");
                         } else {
                             try {
                                 players.remove(ent, count);
-                                Command.sendClientMessage(ChatFormatting.RED + ent.getName() + ChatFormatting.RESET + " just died after popping " + ChatFormatting.RED + count + ChatFormatting.RESET + " totems!");
+                                Command.sendClientMessage(ent.getName() + ChatFormatting.RED + " died" + ChatFormatting.RESET + " after popping " + ChatFormatting.RED + count + ChatFormatting.RESET + " totems");
                             } catch(Exception e){}
                         }
                     });
                 } else {
                     players.put(entity, 1);
-                    Command.sendClientMessage(ChatFormatting.GREEN + entity.getName() + ChatFormatting.RESET  + " just popped" + ChatFormatting.GREEN +  "1" + ChatFormatting.RESET  +  "totem!");
+                    Command.sendClientMessage(entity.getName() + ChatFormatting.RESET + " popped " + ChatFormatting.RED + "1" + ChatFormatting.RESET + " totem");
                 }
             }
         }
@@ -52,7 +52,7 @@ public class TotemPopCounter extends Module {
             players.forEach((e, count) -> {
                 if (e.isDead) {
                     players.remove(e, count);
-                    Command.sendClientMessage(ChatFormatting.RED + e.getName() + ChatFormatting.RESET + " just died after popping " + ChatFormatting.RED + count + ChatFormatting.RESET + " totems!");
+                    Command.sendClientMessage(e.getName() + ChatFormatting.RED + " died" + ChatFormatting.RESET + " after popping " + ChatFormatting.RED + count + ChatFormatting.RESET + " totems");
                 }
             });
         } catch(Exception e){}
