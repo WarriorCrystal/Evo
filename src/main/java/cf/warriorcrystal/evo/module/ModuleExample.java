@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.event.events.PacketEvent;
+import cf.warriorcrystal.evo.event.events.RenderEvent;
 import de.Hero.settings.Setting;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -42,6 +43,10 @@ public class ModuleExample extends Module {
     
     public void onDisable() {
         Evo.EVENT_BUS.unsubscribe(this);
+    }
+
+    public void onWorldRender(RenderEvent event){
+        
     }
 
     @EventHandler

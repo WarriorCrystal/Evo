@@ -33,12 +33,17 @@ public class ModuleManager {
         addMod(new HoleFill());
         addMod(new Criticals());
         addMod(new SmartOffhand());
+
+
         //Player
         addMod(new Blink());
         addMod(new PortalGodMode());
         addMod(new FastUse());
         addMod(new NoSwing());
         addMod(new SpeedMine());
+        addMod(new AntiLog4j());
+
+
         //Movement
         addMod(new Sprint());
         addMod(new Velocity());
@@ -48,6 +53,8 @@ public class ModuleManager {
         addMod(new NoSlow());
         addMod(new Speed());
     //    addMod(new Jesus());
+
+
         //Misc
         addMod(new Timer());
         addMod(new NoEntityTrace());
@@ -64,6 +71,8 @@ public class ModuleManager {
         addMod(new DeathWaypoint());
         addMod(new ClinetTimer());
         addMod(new TotemPopCounter());
+
+
         //Chat
         addMod(new VisualRange());
         addMod(new BetterChat());
@@ -78,6 +87,8 @@ public class ModuleManager {
         addMod(new ColorChat());
         addMod(new ChatSuffix());
         addMod(new KettuLinuxDupe());
+
+
         //Render
         addMod(new GlowESP());
         addMod(new CameraClip());
@@ -94,6 +105,8 @@ public class ModuleManager {
         addMod(new HitboxESP());
         addMod(new FovModule());
         addMod(new BoxESP());
+
+
         //GUI
         addMod(new ModList());
         addMod(new ClickGuiModule());
