@@ -1,6 +1,0 @@
-package com.evo.core.events;
-
-import net.minecraftforge.fml.common.eventhandler.Event;
-
-public class ShutdownEvent extends Event {
-}
