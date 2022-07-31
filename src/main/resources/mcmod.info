@@ -1,12 +1,12 @@
 [
   {
-    "modid": "osiris",
-    "name": "Osiris",
+    "modid": "evo",
+    "name": "Evo",
     "description": "",
     "version": "1.0",
     "mcversion": "1.12.2",
     "url": "",
-    "authorList": ["FINZ0"],
-    "credits": "HeroCode for the ClickGui and settings"
+    "authorList": ["WarriorCrystal"],
+    "credits": "HeroCode for the ClickGui and settings, FINZ0 for Osiris"
   }
 ]

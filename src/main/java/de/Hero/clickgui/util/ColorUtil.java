@@ -3,8 +3,8 @@ package de.Hero.clickgui.util;
 import java.awt.Color;
 
 import de.Hero.settings.SettingsManager;
-import me.finz0.osiris.OsirisMod;
-import me.finz0.osiris.util.Rainbow;
+import cf.warriorcrystal.evo.Evo;
+import cf.warriorcrystal.evo.util.Rainbow;
 
 /**
  *  Made by HeroCode
@@ -16,9 +16,9 @@ import me.finz0.osiris.util.Rainbow;
 public class ColorUtil {
 	
 	public static Color getClickGUIColor(){
-		if(OsirisMod.getInstance().settingsManager.getSettingByName("GuiRainbow").getValBoolean()) {
+		if(Evo.getInstance().settingsManager.getSettingByName("GuiRainbow").getValBoolean()) {
 			return Rainbow.getColor();
 		}else
-			return new Color((int) OsirisMod.getInstance().settingsManager.getSettingByName("GuiRed").getValDouble(), (int) OsirisMod.getInstance().settingsManager.getSettingByName("GuiGreen").getValDouble(), (int)OsirisMod.getInstance().settingsManager.getSettingByName("GuiBlue").getValDouble());
+			return new Color((int) Evo.getInstance().settingsManager.getSettingByName("GuiRed").getValDouble(), (int) Evo.getInstance().settingsManager.getSettingByName("GuiGreen").getValDouble(), (int)Evo.getInstance().settingsManager.getSettingByName("GuiBlue").getValDouble());
 	}
 }

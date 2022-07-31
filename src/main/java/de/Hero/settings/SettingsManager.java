@@ -2,7 +2,7 @@ package de.Hero.settings;
 
 import java.util.ArrayList;
 
-import me.finz0.osiris.module.Module;
+import cf.warriorcrystal.evo.module.Module;
 
 /**
  *  Made by HeroCode
@@ -46,7 +46,7 @@ public class SettingsManager {
 				return set;
 			}
 		}
-		System.err.println("[Osiris] Error Setting NOT found: '" + name +"'!");
+		System.err.println("[Evo] Error Setting NOT found: '" + name +"'!");
 		return null;
 	}
 

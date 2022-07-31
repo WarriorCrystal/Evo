@@ -2,7 +2,7 @@ package de.Hero.settings;
 
 import java.util.ArrayList;
 
-import me.finz0.osiris.module.Module;
+import cf.warriorcrystal.evo.module.Module;
 
 /**
  *  Made by HeroCode

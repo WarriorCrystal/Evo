@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import me.finz0.osiris.hud.HudComponentManager;
+import cf.warriorcrystal.evo.hud.HudComponentManager;
 import de.Hero.settings.SettingsManager;
-import me.finz0.osiris.OsirisMod;
-import me.finz0.osiris.module.Module;
-import me.finz0.osiris.module.ModuleManager;
+import cf.warriorcrystal.evo.Evo;
+import cf.warriorcrystal.evo.module.Module;
+import cf.warriorcrystal.evo.module.ModuleManager;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
@@ -47,7 +47,7 @@ public class ClickGUI extends GuiScreen {
 	 * werden muss
 	 */
 	public ClickGUI() {
-		setmgr = OsirisMod.getInstance().settingsManager;
+		setmgr = Evo.getInstance().settingsManager;
 		panels = new ArrayList<>();
 		FontUtil.setupFontUtils();
 		double pwidth = 80;
@@ -152,7 +152,7 @@ public class ClickGUI extends GuiScreen {
 						for (Element e : b.menuelements) {
 							e.offset = off;
 							e.update();
-							if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
+							if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
 								Gui.drawRect((int)e.x, (int)e.y, (int)e.x + (int)e.width + 2, (int)e.y + (int)e.height, outlineColor);
 							}
 							e.drawScreen(mouseX, mouseY, partialTicks);

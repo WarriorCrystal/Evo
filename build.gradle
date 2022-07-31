@@ -33,7 +33,7 @@ minecraft {
     version = project.forgeVersion
     runDir = 'run'
     mappings = project.mcpVersion
-    coreMod = 'me.finz0.osiris.mixin.OsirisMixinLoader'
+    coreMod = 'cf.warriorcrystal.evo.mixin.EvoMixinLoader'
     makeObfSourceJar = false
 }
 
@@ -105,7 +105,7 @@ shadowJar {
 
 mixin {
     defaultObfuscationEnv searge
-    add sourceSets.main, 'mixins.osiris.refmap.json'
+    add sourceSets.main, 'mixins.evo.refmap.json'
 }
 
 reobf {
@@ -118,13 +118,13 @@ reobf {
 jar {
     manifest {
         attributes(
-                'MixinConfigs': 'mixins.osiris.json',
+                'MixinConfigs': 'mixins.evo.json',
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'me.finz0.osiris.mixin.OsirisMixinLoader',
+                'FMLCorePlugin': 'cf.warriorcrystal.evo.mixin.EvoMixinLoader',
                 'ForceLoadAsMod': 'true',
-                'FMLAT': 'osiris_at.cfg'
+                'FMLAT': 'evo_at.cfg'
         )
     }
 }

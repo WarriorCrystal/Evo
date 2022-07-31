@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import me.finz0.osiris.OsirisMod;
-import me.finz0.osiris.module.Module;
+import cf.warriorcrystal.evo.Evo;
+import cf.warriorcrystal.evo.module.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 
@@ -53,8 +53,8 @@ public class ModuleButton {
 		 *  irgendeinen Aufwand bestimmen welches Element
 		 *  fr ein Setting bentigt wird :>
 		 */
-		if (OsirisMod.getInstance().settingsManager.getSettingsByMod(imod) != null)
-			for (Setting s : OsirisMod.getInstance().settingsManager.getSettingsByMod(imod)) {
+		if (Evo.getInstance().settingsManager.getSettingsByMod(imod) != null)
+			for (Setting s : Evo.getInstance().settingsManager.getSettingsByMod(imod)) {
 					if (s.isCheck()) {
 						menuelements.add(new ElementCheckBox(this, s));
 					} else if (s.isSlider()) {
@@ -74,9 +74,9 @@ public class ModuleButton {
 		temp = ColorUtil.getClickGUIColor();
 
 		int color = new Color(temp.getRed(), temp.getGreen(), temp.getBlue(), 150).getRGB();
-		if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("f0nzi"))
+		if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("f0nzi"))
 			color = 0xbb606060;
-		if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows"))
+		if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows"))
 			color = 0xffffffff;
 		
 		/*
@@ -88,9 +88,9 @@ public class ModuleButton {
 		if (mod.isEnabled()) {
 			Gui.drawRect((int)x - 2, (int)y, (int)x + (int)width + 2, (int)y + (int)height + 1, color);
 			textcolor = 0xffefefef;
-			if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("f0nzi"))
+			if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("f0nzi"))
 				textcolor = ColorUtil.getClickGUIColor().getRGB();
-			if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows"))
+			if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows"))
 				textcolor = Color.BLUE.getRGB();
 		}
 		
@@ -104,7 +104,7 @@ public class ModuleButton {
 		/*
 		 * Den Namen des Modules in die Mitte (x und y) rendern
 		 */
-		if(OsirisMod.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows")) {
+		if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows")) {
 			if(!mod.isEnabled())
 				FontUtil.drawTotalCenteredString(mod.getName(), x + width / 2, y + 1 + height / 2, Color.BLACK.getRGB());
 			else
@@ -137,7 +137,7 @@ public class ModuleButton {
 			 */
 			if (menuelements != null && menuelements.size() > 0) {
 				boolean b = !this.extended;
-				OsirisMod.getInstance().clickGui.closeAllSettings();
+				Evo.getInstance().clickGui.closeAllSettings();
 				this.extended = b;
 				
 				//if(OsirisMod.getInstance().settingsManager.getSettingByName("Sound").getValBoolean())

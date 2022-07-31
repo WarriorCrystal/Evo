@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "cf.warriorcrystal.evo.mixin.mixins",
+  "refmap": "mixins.evo.refmap.json",
+  "mixins": [
+    "MixinNetworkManager",
+    "MixinEntity",
+    "MixinGuiNewChat",
+    "MixinMovementInputFromOptions",
+    "MixinEntityRenderer",
+    "MixinAbstractClientPlayer",
+    "MixinLayerBipedArmor",
+    "MixinPlayerControllerMP",
+    "MixinEntityPlayer",
+    "MixinBlockSoulSand",
+    "MixinEntityPlayerSP",
+    "MixinMinecraft",
+    "MixinGuiPlayerTabOverlay",
+    "MixinGuiMainMenu"
+  ]
+}
