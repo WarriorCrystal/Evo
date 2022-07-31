@@ -105,6 +105,7 @@ public class ModuleManager {
         addMod(new HitboxESP());
         addMod(new FovModule());
         addMod(new BoxESP());
+        addMod(new ThunderKill());
 
 
         //GUI

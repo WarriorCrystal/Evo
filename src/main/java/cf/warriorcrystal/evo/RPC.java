@@ -6,7 +6,7 @@ import club.minnced.discord.rpc.DiscordRichPresence;
 import net.minecraft.client.Minecraft;
 
 public class RPC {
-    private static final String ClientId = "663095007246417923";
+    private static final String ClientId = "746534596635787357";
     private static final Minecraft mc = Minecraft.getMinecraft();
     private static final DiscordRPC rpc = DiscordRPC.INSTANCE;
     public static DiscordRichPresence presence = new DiscordRichPresence();
@@ -18,17 +18,17 @@ public class RPC {
         handlers.disconnected = ((var1, var2) -> System.out.println("Discord RPC disconnected, var1: " + String.valueOf(var1) + ", var2: " + var2));
         rpc.Discord_Initialize(ClientId, handlers, true, "");
         presence.startTimestamp = System.currentTimeMillis() / 1000L;
-        presence.details = "Version " + Evo.MODVER;
+        presence.details = mc.player.getName();
         presence.state = "Main Menu";
-        presence.largeImageKey = "gradient";
-        presence.largeImageText = "finz0 on top";
+        presence.largeImageKey = "yes";
+        presence.largeImageText = Evo.MODVER;
 
         rpc.Discord_UpdatePresence(presence);
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     rpc.Discord_RunCallbacks();
-                    details = "Version " + Evo.MODVER;
+                    details = mc.player.getName();
                     state = "";
                     if (mc.isIntegratedServerRunning()) {
                         state = "Playing Singleplayer";

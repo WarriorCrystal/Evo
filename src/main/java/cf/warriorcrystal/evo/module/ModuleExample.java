@@ -24,12 +24,9 @@ public class ModuleExample extends Module {
         options.add("Two");
         options.add("Three");
         options.add("Four");
-        exampleMode = new Setting("emExampleMode", this, "Two", options);
-        Evo.getInstance().settingsManager.rSetting(exampleMode);
-        exampleBoolean = new Setting("emExampleBoolean", this, false);
-        Evo.getInstance().settingsManager.rSetting(exampleBoolean);
-        exampleNumber = new Setting("exmExampleNumber", this, 255, 0, 255, true);
-        Evo.getInstance().settingsManager.rSetting(exampleNumber);
+        Evo.getInstance().settingsManager.rSetting(exampleMode = new Setting("emExampleMode", this, "Two", options));
+        Evo.getInstance().settingsManager.rSetting(exampleBoolean = new Setting("emExampleBoolean", this, false));
+        Evo.getInstance().settingsManager.rSetting(exampleNumber = new Setting("exmExampleNumber", this, 255, 0, 255, true));
     }
 
     
