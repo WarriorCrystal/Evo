@@ -1,4 +1,4 @@
-package cf.warriorcrystal.evo.module.modules.combat;
+/*package cf.warriorcrystal.evo.module.modules.combat;
 
 
 import cf.warriorcrystal.evo.module.Module;
@@ -95,3 +95,5 @@ public class PVPBot extends Module {
 
 
 }
+
+/*
