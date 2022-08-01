@@ -26,11 +26,14 @@ public class ModuleManager {
         //Combat
         addMod(new KillAura());
         addMod(new AutoCrystal());
+        addMod(new PVPBot());
+        addMod(new AutoHeadCrystal());
         addMod(new Surround());
         addMod(new AutoOffhand());
         addMod(new AutoTrap());
         addMod(new AntiChainPop());
         addMod(new HoleFill());
+        addMod(new BlockLag());
         addMod(new Criticals());
         addMod(new SmartOffhand());
 
@@ -40,6 +43,7 @@ public class ModuleManager {
         addMod(new PortalGodMode());
         addMod(new FastUse());
         addMod(new NoSwing());
+        addMod(new Scaffold());
         addMod(new SpeedMine());
         addMod(new AntiLog4j());
 
@@ -101,8 +105,9 @@ public class ModuleManager {
         addMod(new Tracers());
         addMod(new CsgoESP());
         addMod(new CapesModule());
-    //    addMod(new Nametags());
+        addMod(new NameTags());
         addMod(new HitboxESP());
+        addMod(new PopChams());
         addMod(new FovModule());
         addMod(new BoxESP());
         addMod(new ThunderKill());
@@ -112,6 +117,7 @@ public class ModuleManager {
         //GUI
         addMod(new ModList());
         addMod(new ClickGuiModule());
+        addMod(new Core());
         addMod(new Watermark());
         addMod(new Totems());
         addMod(new Crystals());

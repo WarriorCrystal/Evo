@@ -1,4 +1,4 @@
-package cf.warriorcrystal.evo.module.modules.render;
+/*package cf.warriorcrystal.evo.module.modules.render;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.event.events.PacketEvent;
@@ -534,3 +534,6 @@ public class NameTags extends Module {
     }
 }
 
+
+
+ */

@@ -21,4 +21,5 @@ public class MixinMinecraft {
             guiScreenIn = screenEvent.getScreen();
         } catch (Exception e){}
     }
+
 }
