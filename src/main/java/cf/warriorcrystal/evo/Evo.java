@@ -30,7 +30,7 @@ import java.awt.*;
 public class Evo {
     public static final String MODID = "evo";
     public static final String MODNAME = "Evo";
-    public static final String MODVER = "1.0";
+    public static final String MODVER = "1.0.1";
 
     public static final Logger log = LogManager.getLogger(MODNAME);
     public ClickGUI clickGui;
