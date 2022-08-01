@@ -106,6 +106,7 @@ public class ModuleManager {
         addMod(new FovModule());
         addMod(new BoxESP());
         addMod(new ThunderKill());
+        addMod(new SuperHeroFX());
 
 
         //GUI
