@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 
 public class SuperHeroFX extends Module {
     public SuperHeroFX() {
-        super("ModuleExample", Category.RENDER);
+        super("SuperHeroFX", Category.RENDER);
     }
 
     Setting delay;

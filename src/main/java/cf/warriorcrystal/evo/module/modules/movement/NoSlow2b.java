@@ -1,4 +1,4 @@
-package cf.warriorcrystal.evo.module.modules.movement;
+/*package cf.warriorcrystal.evo.module.modules.movement;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.module.Module;
@@ -17,7 +17,7 @@ public class NoSlow2b extends Module {
     Setting speed;
 
     public NoSlow2b() {
-        super("NoSlow2b", Category.PLAYER);
+        super("NoSlow2b", Category.MOVEMENT);
         ArrayList<String> modes = new ArrayList<>();
         modes.add("Spam");
         modes.add("Constant");
@@ -76,3 +76,6 @@ public class NoSlow2b extends Module {
     }
 
 }
+
+
+ */

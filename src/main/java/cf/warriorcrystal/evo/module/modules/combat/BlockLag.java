@@ -272,8 +272,8 @@ public class BlockLag extends Module {
                         if (e.getY() > mc.player.posY + 2) {
                             if (canTpBlock(e)) {
                                 mc.player.connection.sendPacket(new CPacketPlayer.Position(getCenterModX(e), e.getY(), getCenterModZ(e), false));
-                                //mc.player.setPosition(getCenterModX(e), e.getY() + 1, getCenterModZ(e));
-                                //Command.sendClientMessage(getCenterModX(e) + " " + e.up().getY() + " " + getCenterModZ(e));
+                                mc.player.setPosition(getCenterModX(e), e.getY() + 1, getCenterModZ(e));
+                                Command.sendClientMessage(getCenterModX(e) + " " + e.up().getY() + " " + getCenterModZ(e));
                                 break;
                             }
                         }

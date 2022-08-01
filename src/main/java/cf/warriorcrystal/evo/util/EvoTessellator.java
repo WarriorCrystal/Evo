@@ -87,7 +87,21 @@ public class EvoTessellator extends Tessellator {
         final int b = argb & 0xFF;
         drawBox(INSTANCE.getBuffer(), x, y, z, 1, 1, 1, r, g, b, a, sides);
     }
+    public static void drawHalfBox(BlockPos blockPos, int argb, int sides) {
+        final int a = (argb >>> 24) & 0xFF;
+        final int r = (argb >>> 16) & 0xFF;
+        final int g = (argb >>> 8) & 0xFF;
+        final int b = argb & 0xFF;
+        drawHalfBox(blockPos, r, g, b, a, sides);
+    }
 
+    public static void drawHalfBox(float x, float y, float z, int argb, int sides) {
+        final int a = (argb >>> 24) & 0xFF;
+        final int r = (argb >>> 16) & 0xFF;
+        final int g = (argb >>> 8) & 0xFF;
+        final int b = argb & 0xFF;
+        drawBox(INSTANCE.getBuffer(), x, y, z, 1, 0.5f, 1, r, g, b, a, sides);
+    }
     public static void drawBox(BlockPos blockPos, int r, int g, int b, int a, int sides) {
         drawBox(INSTANCE.getBuffer(), blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 1, 1, r, g, b, a, sides);
     }
@@ -95,7 +109,9 @@ public class EvoTessellator extends Tessellator {
     public static void drawBox(Vec3d vec3d, int r, int g, int b, int a, int sides) {
         drawBox(INSTANCE.getBuffer(), (float)vec3d.x, (float)vec3d.y, (float)vec3d.z, 1, 1, 1, r, g, b, a, sides);
     }
-
+    public static void drawHalfBox(BlockPos blockPos, int r, int g, int b, int a, int sides) {
+        drawBox(INSTANCE.getBuffer(), blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1, 0.5f, 1, r, g, b, a, sides);
+    }
     public static BufferBuilder getBufferBuilder() {
         return INSTANCE.getBuffer();
     }

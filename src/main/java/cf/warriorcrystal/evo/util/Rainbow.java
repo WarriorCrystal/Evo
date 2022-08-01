@@ -18,6 +18,9 @@ public class Rainbow {
     public static Color getColorWithOpacity(int opacity) {
         return new Color(getColor().getRed(), getColor().getGreen(), getColor().getBlue(), opacity);
     }
+    public static int getIntWithOpacity(int opacity) {
+        return getColorWithOpacity(opacity).getRGB();
+    }
 
     public static Color getAllRainbow() {
         final float[] hue = {(System.currentTimeMillis() % (360 * 32)) / (360f * 32)};

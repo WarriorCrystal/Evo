@@ -23,6 +23,5 @@ public class Core extends Module {
         Evo.getInstance().settingsManager.rSetting(saturation = new Setting("Saturation", this, .8, 0, 1, false));
         Evo.getInstance().settingsManager.rSetting(brightness = new Setting("Brightness", this, .8, 0, 1, false));
         Evo.getInstance().settingsManager.rSetting(speed = new Setting("Speed", this, 1, 0, 5, false));
-        Evo.getInstance().settingsManager.rSetting(customFont = new Setting("CustomFont", this, true));
     }
 }

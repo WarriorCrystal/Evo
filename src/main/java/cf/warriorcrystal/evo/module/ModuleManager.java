@@ -26,6 +26,7 @@ public class ModuleManager {
         //Combat
         addMod(new KillAura());
         addMod(new AutoCrystal());
+        addMod(new AutoCrystalNew());
         addMod(new PVPBot());
         addMod(new AutoHeadCrystal());
         addMod(new Surround());
@@ -42,6 +43,7 @@ public class ModuleManager {
         addMod(new Blink());
         addMod(new PortalGodMode());
         addMod(new FastUse());
+        addMod(new FakePlayer());
         addMod(new NoSwing());
         addMod(new Scaffold());
         addMod(new SpeedMine());
@@ -55,6 +57,7 @@ public class ModuleManager {
         addMod(new GuiMove());
         addMod(new ElytraFly());
         addMod(new NoSlow());
+        addMod(new NoSlow2b());
         addMod(new Speed());
     //    addMod(new Jesus());
 
@@ -76,6 +79,7 @@ public class ModuleManager {
         addMod(new TotemPopCounter());
         addMod(new AutoSalDupe());
         addMod(new AutoBuild());
+        addMod(new AutoWither());
 
 
         //Chat
@@ -106,7 +110,6 @@ public class ModuleManager {
         addMod(new Tracers());
         addMod(new CsgoESP());
         addMod(new CapesModule());
-        addMod(new NameTags());
         addMod(new HitboxESP());
         addMod(new PopChams());
         addMod(new FovModule());
