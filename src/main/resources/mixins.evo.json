@@ -9,7 +9,6 @@
     "MixinGuiNewChat",
     "MixinMovementInputFromOptions",
     "MixinEntityRenderer",
-    "MixinItemRenderer",
     "MixinAbstractClientPlayer",
     "MixinLayerBipedArmor",
     "MixinPlayerControllerMP",

@@ -1,4 +1,4 @@
-package cf.warriorcrystal.evo.mixin.mixins;
+/*package cf.warriorcrystal.evo.mixin.mixins;
 
 import cf.warriorcrystal.evo.module.ModuleManager;
 import cf.warriorcrystal.evo.module.modules.render.ViewModelChanger;
@@ -22,53 +22,6 @@ public abstract class MixinItemRenderer {
     protected MixinItemRenderer(RenderManager renderManager) {
         this.renderManager = renderManager;
     }
-
-  /*  @Inject(method = "renderItemInFirstPerson(F)V", at = @At("HEAD"), cancellable = true)
-    public void renderItemInFirstPerson(float partialTicks, CallbackInfo info) {
-        if (ModuleManager.getModuleByName("QuickDrop").isEnabled()) {
-            AbstractClientPlayer abstractclientplayer = this.mc.player;
-            float f = abstractclientplayer.getSwingProgress(partialTicks);
-            EnumHand enumhand = (EnumHand) MoreObjects.firstNonNull(abstractclientplayer.swingingHand, EnumHand.MAIN_HAND);
-            float f1 = abstractclientplayer.prevRotationPitch + (abstractclientplayer.rotationPitch - abstractclientplayer.prevRotationPitch) * partialTicks;
-            float f2 = abstractclientplayer.prevRotationYaw + (abstractclientplayer.rotationYaw - abstractclientplayer.prevRotationYaw) * partialTicks;
-            boolean flag = true;
-            boolean flag1 = true;
-            if (abstractclientplayer.isHandActive()) {
-                ItemStack itemstack = abstractclientplayer.getActiveItemStack();
-                if (!itemstack.isEmpty() && itemstack.getItem() == Items.BOW) {
-                    EnumHand enumhand1 = abstractclientplayer.getActiveHand();
-                    flag = enumhand1 == EnumHand.MAIN_HAND;
-                    flag1 = !flag;
-                }
-            }
-        }
-    }
-    */
-
-
-    /*  @Inject(method = "renderMapFirstPersonSide", at = @At("HEAD"), cancellable = true)
-      public void renderMapFirstPersonSide(float p_187465_1_, EnumHandSide hand, float p_187465_3_, ItemStack stack, CallbackInfo info) {
-          float f = hand == EnumHandSide.RIGHT ? 1.0F : -1.0F;
-          GlStateManager.translate(f * 0.125F, -0.125F, 0.0F);
-          if (!this.mc.player.isInvisible()) {
-              GlStateManager.pushMatrix();
-              GlStateManager.rotate(f * 10.0F, 0.0F, 0.0F, 1.0F);
-              //this.renderArmFirstPerson(p_187465_1_, p_187465_3_, hand);
-              GlStateManager.popMatrix();
-          }
-          GlStateManager.pushMatrix();
-          GlStateManager.translate(f * 0.51F, -0.08F + p_187465_1_ * -1.2F, -0.75F);
-          float f1 = MathHelper.sqrt(p_187465_3_);
-          float f2 = MathHelper.sin(f1 * 3.1415927F);
-          float f3 = -0.5F * f2;
-          float f4 = 0.4F * MathHelper.sin(f1 * 6.2831855F);
-          float f5 = -0.3F * MathHelper.sin(p_187465_3_ * 3.1415927F);
-          GlStateManager.translate(f * f3, f4 - 0.3F * f2, f5);
-          GlStateManager.rotate(f2 * -45.0F, 1.0F, 1.0F, 0.0F);
-          GlStateManager.rotate(f * f2 * -30.0F, 0.0F, 1.0F, 0.0F);
-          //this.renderMapFirstPerson(stack);
-          GlStateManager.popMatrix();
-      } */
     @Inject(method = "transformEatFirstPerson", at = @At("HEAD"), cancellable = true)
     private void transformEatFirstPerson(float p_187454_1_, EnumHandSide hand, ItemStack stack, CallbackInfo ci) {
         if (ModuleManager.getModuleByName("ViewModelChanger").isEnabled()) {
@@ -113,3 +66,5 @@ public abstract class MixinItemRenderer {
         }
     }
 }
+
+ */
