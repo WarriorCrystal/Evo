@@ -1,9 +1,9 @@
 package cf.warriorcrystal.evo.event;
 
 
-import cf.warriorcrystal.evo.event.events.EventCancellable;
+import me.zero.alpine.type.Cancellable;
 
-public class EvoEvent extends EventCancellable {
+public class EvoEvent extends Cancellable {
 
     public EvoEvent() {
     }

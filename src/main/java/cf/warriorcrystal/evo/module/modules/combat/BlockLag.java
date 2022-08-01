@@ -293,7 +293,7 @@ public class BlockLag extends Module {
             Packet packet = event.getPacket();
 
             if (event.getPacket() instanceof SPacketPlayerPosLook) {
-                event.setCanceled(true);
+                event.cancel();
                 //this.toggle();
                 double d0 = ((ISPacketPlayerPosLook) event.getPacket()).getX();
                 double d1 = ((ISPacketPlayerPosLook) event.getPacket()).getY();
