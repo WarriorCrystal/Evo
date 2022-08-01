@@ -79,7 +79,6 @@ public class ModuleManager {
         addMod(new ClinetTimer());
         addMod(new TotemPopCounter());
         addMod(new AutoSalDupe());
-        addMod(new AutoBuild());
         addMod(new AutoWither());
 
 
