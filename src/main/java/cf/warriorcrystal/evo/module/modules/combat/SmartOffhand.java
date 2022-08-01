@@ -2,12 +2,16 @@ package cf.warriorcrystal.evo.module.modules.combat;
 
 import de.Hero.settings.Setting;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.settings.HotbarSnapshot;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
@@ -17,10 +21,11 @@ import java.util.stream.Collectors;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.module.Module;
+import cf.warriorcrystal.evo.util.salhack.PlayerUtil;
 
 public class SmartOffhand extends Module {
     public SmartOffhand() {
-        super("SmartOffhand", Category.COMBAT);
+        super("Offhand", Category.COMBAT);
     }
 
     public int totems;
@@ -30,107 +35,157 @@ public class SmartOffhand extends Module {
     Item item;
 
     Setting health;
-    Setting crystalCheck;
-    Setting itemSetting;
+    Setting Mode;
+    Setting FallbackMode;
+    Setting FallDistance;
+    Setting TotemOnElytra;
+    Setting OffhandGapOnSword;
+    Setting OffhandStrNoStrSword;
+    Setting HotbarFirst;
 
     public void setup(){
         ArrayList<String> items = new ArrayList<>();
+        items.add("Totem");
+        items.add("Gap");
         items.add("Crystal");
-        items.add("Gapple");
-        Evo.getInstance().settingsManager.rSetting(health = new Setting("soHealth", this, 10, 1, 40, true));
-        Evo.getInstance().settingsManager.rSetting(crystalCheck = new Setting("soCrystalCheck", this, false));
-        Evo.getInstance().settingsManager.rSetting(itemSetting = new Setting("soItem", this, "Crystal", items));
+        items.add("Pearl");
+        items.add("Chorus");
+        items.add("Stregth");
+        Evo.getInstance().settingsManager.rSetting(health = new Setting("Health", this, 16.0f, 0.0f, 20.0f, false));
+        Evo.getInstance().settingsManager.rSetting(Mode = new Setting("Mode", this, "Crystal", items));
+        Evo.getInstance().settingsManager.rSetting(FallbackMode = new Setting("FallbackMode", this, "Crystal", items));
+        Evo.getInstance().settingsManager.rSetting(FallDistance = new Setting("FallDistance", this, 15.0f, 0.0f, 100.0f, false));
+        Evo.getInstance().settingsManager.rSetting(TotemOnElytra = new Setting("TotemOnElytra", this, true));
+        Evo.getInstance().settingsManager.rSetting(OffhandGapOnSword = new Setting("SwordGap", this, true));
+        Evo.getInstance().settingsManager.rSetting(OffhandStrNoStrSword = new Setting("StrIfNoStr", this, false));
+        Evo.getInstance().settingsManager.rSetting(HotbarFirst = new Setting("HorbarFirst", this, false));
     }
 
     public void onUpdate() {
-        if(itemSetting.getValString().equalsIgnoreCase("Gapple")) item = Items.GOLDEN_APPLE;
-        else item = Items.END_CRYSTAL;
-
-        if(mc.currentScreen instanceof GuiContainer) return;
-        if (returnI) {
-            int t = -1;
-            for (int i = 0; i < 45; i++)
-                if (mc.player.inventory.getStackInSlot(i).isEmpty()) {
-                    t = i;
-                    break;
-                }
-            if (t == -1) return;
-            mc.playerController.windowClick(0, t < 9 ? t + 36 : t, 0, ClickType.PICKUP, mc.player);
-            returnI = false;
-        }
-        totems = mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.TOTEM_OF_UNDYING).mapToInt(ItemStack::getCount).sum();
-        crystals = mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == item).mapToInt(ItemStack::getCount).sum();
-        if (shouldTotem() && mc.player.getHeldItemOffhand().getItem() == Items.TOTEM_OF_UNDYING) totems++;
-        else if (!shouldTotem() && mc.player.getHeldItemOffhand().getItem() == item) crystals += mc.player.getHeldItemOffhand().getCount();
-        else {
-            if (moving) {
-                mc.playerController.windowClick(0, 45, 0, ClickType.PICKUP, mc.player);
-                moving = false;
-                returnI = true;
+        if (mc.currentScreen != null && (!(mc.currentScreen instanceof GuiInventory)))
+            return;
+        
+        if (!mc.player.getHeldItemMainhand().isEmpty())
+        {
+            if ((float) health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandStrNoStrSword.getValBoolean() && !mc.player.isPotionActive(MobEffects.STRENGTH))
+            {
+                SwitchOffHandIfNeed("Strength");
                 return;
             }
-            if (mc.player.inventory.getItemStack().isEmpty()) {
-                if(!shouldTotem() && mc.player.getHeldItemOffhand().getItem() == item) return;
-                if(shouldTotem() && mc.player.getHeldItemOffhand().getItem() == Items.TOTEM_OF_UNDYING) return;
-                if(!shouldTotem()) {
-                    if(crystals == 0) return;
-                    int t = -1;
-                    for (int i = 0; i < 45; i++)
-                        if (mc.player.inventory.getStackInSlot(i).getItem() == item) {
-                            t = i;
-                            break;
-                        }
-                    if (t == -1) return; // Should never happen!
-                    mc.playerController.windowClick(0, t < 9 ? t + 36 : t, 0, ClickType.PICKUP, mc.player);
-                    moving = true;
-                } else {
-                    if(totems == 0) return;
-                    int t = -1;
-                    for (int i = 0; i < 45; i++)
-                        if (mc.player.inventory.getStackInSlot(i).getItem() == Items.TOTEM_OF_UNDYING) {
-                            t = i;
-                            break;
-                        }
-                    if (t == -1) return; // Should never happen!
-                    mc.playerController.windowClick(0, t < 9 ? t + 36 : t, 0, ClickType.PICKUP, mc.player);
-                    moving = true;
-                }
-            } else {
-                int t = -1;
-                for (int i = 0; i < 45; i++)
-                    if (mc.player.inventory.getStackInSlot(i).isEmpty()) {
-                        t = i;
-                        break;
+            
+            /// Sword override
+            if ((float) health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandGapOnSword.getValBoolean())
+            {
+                SwitchOffHandIfNeed("Gap");
+                return;
+            }
+        }
+        
+        /// First check health, most important as we don't want to die for no reason.
+        if ((float) health.getValDouble() > PlayerUtil.GetHealthWithAbsorption() || Mode.getValString() == "Totem" || (TotemOnElytra.getValBoolean() && mc.player.isElytraFlying()) || (mc.player.fallDistance >= (float) FallDistance.getValDouble() && !mc.player.isElytraFlying()))
+        {
+            SwitchOffHandIfNeed("Totem");
+            return;
+        }
+        
+        /// If we meet the required health
+        SwitchOffHandIfNeed(Mode.getValString());
+    }
+
+    private void SwitchOffHandIfNeed(String p_Val)
+    {
+        Item l_Item = GetItemFromModeVal(p_Val);
+        
+        if (mc.player.getHeldItemOffhand().getItem() != l_Item)
+        {
+            int l_Slot = HotbarFirst.getValBoolean() ? PlayerUtil.GetRecursiveItemSlot(l_Item) : PlayerUtil.GetItemSlot(l_Item);
+            
+            Item l_Fallback = GetItemFromModeVal(FallbackMode.getValString());
+            
+            String l_Display = GetItemNameFromModeVal(p_Val);
+            
+            if (l_Slot == -1 && l_Item != l_Fallback && mc.player.getHeldItemOffhand().getItem() != l_Fallback)
+            {
+                l_Slot = PlayerUtil.GetRecursiveItemSlot(l_Fallback);
+                l_Display = GetItemNameFromModeVal(FallbackMode.getValString());
+                
+                /// still -1...
+                if (l_Slot == -1 && l_Fallback != Items.TOTEM_OF_UNDYING)
+                {
+                    l_Fallback = Items.TOTEM_OF_UNDYING;
+                    
+                    if (l_Item != l_Fallback && mc.player.getHeldItemOffhand().getItem() != l_Fallback)
+                    {
+                        l_Slot = PlayerUtil.GetRecursiveItemSlot(l_Fallback);
+                        l_Display = "Emergency Totem";
                     }
-                if (t == -1) return;
-                mc.playerController.windowClick(0, t < 9 ? t + 36 : t, 0, ClickType.PICKUP, mc.player);
+                }
+            }
+
+            if (l_Slot != -1)
+            {
+                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, l_Slot, 0,
+                        ClickType.PICKUP, mc.player);
+                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, 45, 0, ClickType.PICKUP,
+                        mc.player);
+                
+                /// @todo: this might cause desyncs, we need a callback for windowclicks for transaction complete packet.
+                mc.playerController.windowClick(mc.player.inventoryContainer.windowId, l_Slot, 0,
+                        ClickType.PICKUP, mc.player);
+                mc.playerController.updateController();
+                
             }
         }
     }
 
-    private boolean shouldTotem(){
-        boolean hp = (mc.player.getHealth() + mc.player.getAbsorptionAmount()) <= health.getValInt();
-        boolean endcrystal = !isCrystalsAABBEmpty();
-        //boolean totemCount = (totems > 0);
-        if(crystalCheck.getValBoolean())
-            return (hp || endcrystal);
-        else
-            return  hp;
+    public Item GetItemFromModeVal(String p_Val)
+    {
+        switch (p_Val)
+        {
+            case "Crystal":
+                return Items.END_CRYSTAL;
+            case "Gap":
+                return Items.GOLDEN_APPLE;
+            case "Pearl":
+                return Items.ENDER_PEARL;
+            case "Chorus":
+                return Items.CHORUS_FRUIT;
+            case "Strength":
+                return Items.POTIONITEM;
+            default:
+                break;
+        }
+        
+        return Items.TOTEM_OF_UNDYING;
     }
 
-    private boolean isEmpty(BlockPos pos){
-        List<Entity> crystalsInAABB =  mc.world.getEntitiesWithinAABBExcludingEntity(null, new AxisAlignedBB(pos)).stream()
-                .filter(e -> e instanceof EntityEnderCrystal)
-                .collect(Collectors.toList());
-        return crystalsInAABB.isEmpty();
+    private String GetItemNameFromModeVal(String p_Val)
+    {
+        switch (p_Val)
+        {
+            case "Crystal":
+                return "End Crystal";
+            case "Gap":
+                return "Gap";
+            case "Pearl":
+                return "Pearl";
+            case "Chorus":
+                return "Chorus";
+            case "Strength":
+                return "Strength";
+            default:
+                break;
+        }
+        
+        return "Totem";
     }
 
-    private boolean isCrystalsAABBEmpty(){
-        return  isEmpty(mc.player.getPosition().add(1, 0, 0)) &&
-                isEmpty(mc.player.getPosition().add(-1, 0, 0)) &&
-                isEmpty(mc.player.getPosition().add(0, 0, 1)) &&
-                isEmpty(mc.player.getPosition().add(0, 0, -1)) &&
-                isEmpty(mc.player.getPosition());
+    public void onEnable(){
+        Evo.EVENT_BUS.subscribe(this);
+    }
+
+    public void onDisable(){
+        Evo.EVENT_BUS.unsubscribe(this);
     }
 
 }

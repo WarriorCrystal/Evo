@@ -60,7 +60,6 @@ public class ModuleManager {
 
 
         //Misc
-        addMod(new Timer());
         addMod(new NoEntityTrace());
         addMod(new XCarry());
         addMod(new AutoNomadHut());
@@ -75,6 +74,8 @@ public class ModuleManager {
         addMod(new DeathWaypoint());
         addMod(new ClinetTimer());
         addMod(new TotemPopCounter());
+        addMod(new AutoSalDupe());
+        addMod(new AutoBuild());
 
 
         //Chat

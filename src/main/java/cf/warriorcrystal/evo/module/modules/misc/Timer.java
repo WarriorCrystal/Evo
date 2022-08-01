@@ -1,3 +1,5 @@
+//tuve q quitar el modulo por algunos inconvenientes
+/*
 package cf.warriorcrystal.evo.module.modules.misc;
 
 import de.Hero.settings.Setting;
@@ -7,6 +9,8 @@ import java.text.DecimalFormat;
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.module.Module;
 import cf.warriorcrystal.evo.util.TpsUtils;
+
+
 
 public class Timer extends Module {
     public static Timer INSTANCE;
@@ -52,3 +56,4 @@ public class Timer extends Module {
     }
 
 }
+ */
