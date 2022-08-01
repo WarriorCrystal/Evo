@@ -56,6 +56,8 @@ public class ModuleManager {
         addMod(new GuiMove());
         addMod(new ElytraFly());
         addMod(new NoSlow());
+        addMod(new Step());
+        addMod(new ReverseStep());
         addMod(new AutoReplenish());
         addMod(new Speed());
     //    addMod(new Jesus());
