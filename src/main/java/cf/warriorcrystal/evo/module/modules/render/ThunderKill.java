@@ -67,5 +67,8 @@ public class ThunderKill extends Module {
         Evo.EVENT_BUS.subscribe(this);
         playersDead.clear();
     }
+    public void onDisable() {
+        Evo.EVENT_BUS.subscribe(this);
+    }
 
 }

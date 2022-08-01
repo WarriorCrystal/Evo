@@ -1,5 +1,6 @@
 package cf.warriorcrystal.evo.module.modules.player;
 
+import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.command.Command;
 import cf.warriorcrystal.evo.event.events.PacketEvent;
 import cf.warriorcrystal.evo.module.Module;
@@ -22,5 +23,13 @@ public class AntiLog4j extends Module {
             event.cancel();
         }
     });
+
+    public void onEnable(){
+        Evo.EVENT_BUS.subscribe(this);
+    }
+
+    public void onDisable(){
+        Evo.EVENT_BUS.unsubscribe(this);
+    }
 
 }
