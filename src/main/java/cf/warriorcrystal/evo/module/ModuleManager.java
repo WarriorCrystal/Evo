@@ -22,6 +22,7 @@ public class ModuleManager {
     public static ArrayList<Module> modules;
     public ModuleManager(){
         modules = new ArrayList<>();
+
         //Combat
         addMod(new KillAura());
         addMod(new AutoCrystal());

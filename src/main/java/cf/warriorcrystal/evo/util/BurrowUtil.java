@@ -24,7 +24,6 @@ import java.util.List;
 
 public class BurrowUtil {
     public static final Minecraft mc = Minecraft.getMinecraft();
-
     public static boolean placeBlock(BlockPos pos, EnumHand hand, boolean rotate, boolean packet, boolean isSneaking) {
         boolean sneaking = false;
         EnumFacing side = BurrowUtil.getFirstFacing(pos);

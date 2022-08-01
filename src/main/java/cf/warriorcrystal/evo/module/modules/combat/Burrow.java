@@ -25,7 +25,6 @@ public class Burrow
     public Burrow() {
         super("Burrow", Category.COMBAT);
     }
-
         Setting offset;
         Setting ground;
         Setting rotate;

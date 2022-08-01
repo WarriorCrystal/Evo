@@ -1,5 +1,6 @@
 /*package cf.warriorcrystal.evo.module.modules.combat;
 
+
 import cf.warriorcrystal.evo.module.Module;
 import cf.warriorcrystal.evo.module.ModuleManager;
 import cf.warriorcrystal.evo.util.*;
