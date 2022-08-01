@@ -37,9 +37,9 @@ public class SuperHeroFX extends Module {
     Setting extra;
 
     public void setup(){
-        Evo.getInstance().settingsManager.rSetting(delay = new Setting("shfDelay", this, 1.0f, 0.0f, 10.0f, false));
-        Evo.getInstance().settingsManager.rSetting(scale = new Setting("shfScale", this, 1.5f, 0.0f, 10.0f, false));
-        Evo.getInstance().settingsManager.rSetting(extra = new Setting("shfExtra", this, 1, 0, 50, true));
+        Evo.getInstance().settingsManager.rSetting(delay = new Setting("Delay", this, 1.0f, 0.0f, 10.0f, false));
+        Evo.getInstance().settingsManager.rSetting(scale = new Setting("Scale", this, 1.5f, 0.0f, 10.0f, false));
+        Evo.getInstance().settingsManager.rSetting(extra = new Setting("Extra", this, 1, 0, 50, true));
     }
 
     public static final FontManager fontManager = new FontManager();
