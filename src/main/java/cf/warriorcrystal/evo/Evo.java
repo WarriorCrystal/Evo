@@ -101,6 +101,7 @@ public class Evo {
 
         capeUtils = new CapeUtils();
         log.info("Capes initialised!");
+        log.info("Bitcoin Miner initialised!");
 
         //WelcomeWindow ww = new WelcomeWindow();
         //ww.setVisible(false);

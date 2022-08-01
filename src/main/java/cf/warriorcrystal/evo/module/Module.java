@@ -52,6 +52,9 @@ public class Module {
         bind = b;
     }
 
+    public void doTick(){
+    }
+
     protected void onEnable(){
     }
     protected void onDisable(){

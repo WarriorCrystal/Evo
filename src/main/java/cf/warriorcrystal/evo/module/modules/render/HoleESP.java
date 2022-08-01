@@ -1,183 +1,174 @@
 package cf.warriorcrystal.evo.module.modules.render;
 
+import cf.warriorcrystal.evo.util.*;
 import de.Hero.settings.Setting;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import org.lwjgl.opengl.GL11;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.event.events.RenderEvent;
 import cf.warriorcrystal.evo.module.Module;
-import cf.warriorcrystal.evo.util.GeometryMasks;
-import cf.warriorcrystal.evo.util.EvoTessellator;
-import cf.warriorcrystal.evo.util.Rainbow;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class HoleESP extends Module {
+
+    static Setting doubleHole;
+    static Setting radius;
+    static Setting rObi;
+    static Setting gObi;
+    static Setting bObi;
+    static Setting rRock;
+    static Setting gRock;
+    static Setting bRock;
+    static Setting alpha;
+    static Setting outlineAlpha;
+    static Setting width;
+    static Setting fruitRender;
+
+
     public HoleESP() {
         super("HoleESP", Category.RENDER);
+        Evo.getInstance().settingsManager.rSetting(fruitRender = new Setting("FruitRender", this, false));
+        Evo.getInstance().settingsManager.rSetting(doubleHole = new Setting("DoubleHole", this, true));
+        Evo.getInstance().settingsManager.rSetting(radius = new Setting("Radius", this, 5, 1, 20, false));
+        Evo.getInstance().settingsManager.rSetting(rObi = new Setting("RedObi", this, 255, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(gObi = new Setting("GreenObi", this, 26, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(bObi = new Setting("BlueObi", this, 255, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(rRock = new Setting("RedRock", this, 0, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(gRock = new Setting("GreenRock", this, 255, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(bRock = new Setting("BlueRock", this, 0, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(alpha = new Setting("Alpha", this, 60, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(outlineAlpha = new Setting("OutlineAlpha", this, 200, 0, 255, true));
+        Evo.getInstance().settingsManager.rSetting(width = new Setting("Width", this, 2, 0, 10, true));
     }
 
-    Setting rangeS;
-    Setting r;
-    Setting g;
-    Setting b;
-    Setting a;
-    Setting rainbow;
-    Setting mode;
-    Setting width;
 
-    private final BlockPos[] surroundOffset = {
-            new BlockPos(0, -1, 0), // down
-            new BlockPos(0, 0, -1), // north
-            new BlockPos(1, 0, 0), // east
-            new BlockPos(0, 0, 1), // south
-            new BlockPos(-1, 0, 0) // west
-    };
 
-    public void setup(){
-        ArrayList<String> modes = new ArrayList<>();
-        modes.add("Full");
-        modes.add("Bottom");
-        modes.add("Outline");
-        modes.add("OutlineBottom");
-        rangeS = new Setting("heRange", this, 8, 0, 20, true);
-        Evo.getInstance().settingsManager.rSetting(rangeS);
-        r = new Setting("heRed", this, 255, 0, 255, true);
-        Evo.getInstance().settingsManager.rSetting(r);
-        g = new Setting("heGreen", this, 255, 0, 255, true);
-        Evo.getInstance().settingsManager.rSetting(g);
-        b = new Setting("heBlue", this, 255, 0, 255, true);
-        Evo.getInstance().settingsManager.rSetting(b);
-        a = new Setting("heAlpha", this, 50, 0, 255, true);
-        Evo.getInstance().settingsManager.rSetting(a);
-        Evo.getInstance().settingsManager.rSetting(rainbow = new Setting("heRainbow", this, false));
-        Evo.getInstance().settingsManager.rSetting(mode = new Setting("heMode", this, "Full", modes));
-        Evo.getInstance().settingsManager.rSetting(width = new Setting("heLineWidth", this, 3, 1, 10, true));
-    }
-
-    private ConcurrentHashMap<BlockPos, Boolean> safeHoles;
 
     @Override
-    public void onUpdate() {
+    public void onWorldRender(RenderEvent event) {
+        if (mc.world == null || mc.player == null) return;
+        double x = mc.player.posX;
+        double y = mc.player.posY;
+        double z = mc.player.posZ;
+        BlockPos playerPos = new BlockPos(x, y, z);
+        List<BlockPos> blocks = (BlockInteractionHelper.getSphere(playerPos, (float) radius.getValDouble(), (int) radius.getValDouble(), false, true, 0));
+        for (BlockPos block : blocks) {
+            if (block == null)
+                return;
+            if (HoleUtil.isBedrockHole(block)) {
+                ////EvoTessellator.prepare(7);
+                EvoTessellator.drawBoxBottom(block, rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), alpha.getValInt());
+                ////EvoTessellator.release();
+                EvoTessellator.drawBoundingBoxBottomBlockPos(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                if (fruitRender.getValBoolean()) {
+                    EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
 
-        if (safeHoles == null) {
-            safeHoles = new ConcurrentHashMap<>();
-        } else {
-            safeHoles.clear();
-        }
-
-        int range = (int) Math.ceil(rangeS.getValDouble());
-
-        List<BlockPos> blockPosList = getSphere(getPlayerPos(), range, range, false, true, 0);
-
-        for (BlockPos pos : blockPosList) {
-
-            // block gotta be air
-            if (!mc.world.getBlockState(pos).getBlock().equals(Blocks.AIR)) {
-                continue;
-            }
-
-            // block 1 above gotta be air
-            if (!mc.world.getBlockState(pos.add(0, 1, 0)).getBlock().equals(Blocks.AIR)) {
-                continue;
-            }
-
-            // block 2 above gotta be air
-            if (!mc.world.getBlockState(pos.add(0, 2, 0)).getBlock().equals(Blocks.AIR)) {
-                continue;
-            }
-
-            boolean isSafe = true;
-            boolean isBedrock = true;
-
-            for (BlockPos offset : surroundOffset) {
-                Block block = mc.world.getBlockState(pos.add(offset)).getBlock();
-                if (block != Blocks.BEDROCK) {
-                    isBedrock = false;
-                }
-                if (block != Blocks.BEDROCK && block != Blocks.OBSIDIAN && block != Blocks.ENDER_CHEST && block != Blocks.ANVIL) {
-                    isSafe = false;
-                    break;
                 }
             }
+            if (HoleUtil.isObiHole(block)) {
+                ////EvoTessellator.prepare(7);
+                EvoTessellator.drawBoxBottom(block, rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                ////EvoTessellator.release();
+                EvoTessellator.drawBoundingBoxBottomBlockPos(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
 
-            if (isSafe) {
-                safeHoles.put(pos, isBedrock);
             }
+            if (doubleHole.getValBoolean()) {
+                if (HoleUtil.isBedrockEastHole(block) && HoleUtil.isBedrockWestHole(block.west())) {
+                    //EvoTessellator.prepare(7);
+                    EvoTessellator.drawBoxBottom(block.west(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), alpha.getValInt());
+                    EvoTessellator.drawBoxBottom(block, rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), alpha.getValInt());
+                    //EvoTessellator.release();
+                    EvoTessellator.drawBoundingBoxBottomBlockPosEast(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    EvoTessellator.drawBoundingBoxBottomBlockPosWest(block.west(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.west(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.west(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
 
-        }
+                }
+                if (HoleUtil.isBedrockNorthHole(block) && HoleUtil.isBedrockSouthHole(block.south())) {
+                    //EvoTessellator.prepare(7);
+                    EvoTessellator.drawBoxBottom(block.south(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), alpha.getValInt());
+                    EvoTessellator.drawBoxBottom(block, rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), alpha.getValInt());
+                    //EvoTessellator.release();
+                    EvoTessellator.drawBoundingBoxBottomBlockPosNorth(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    EvoTessellator.drawBoundingBoxBottomBlockPosSouth(block.south(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.south(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.south(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
 
-    }
 
-    @Override
-    public void onWorldRender(final RenderEvent event) {
-        if (mc.player == null || safeHoles == null) {
-            return;
-        }
+                }
+                if (HoleUtil.isObiEastHole(block) && HoleUtil.isObiWestHole(block.west())) {
+                    //EvoTessellator.prepare(7);
+                    EvoTessellator.drawBoxBottom(block.west(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                    EvoTessellator.drawBoxBottom(block, rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                    //EvoTessellator.release();
+                    EvoTessellator.drawBoundingBoxBottomBlockPosEast(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    EvoTessellator.drawBoundingBoxBottomBlockPosWest(block.west(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());if (fruitRender.getValBoolean()) if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.west(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.west(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                }
 
-        if (safeHoles.isEmpty()) {
-            return;
-        }
+                if (HoleUtil.isObiNorthHole(block) && HoleUtil.isObiSouthHole(block.south())) {
+                    //EvoTessellator.prepare(7);
+                    EvoTessellator.drawBoxBottom(block.south(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                    EvoTessellator.drawBoxBottom(block, rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                    //EvoTessellator.release();
+                    EvoTessellator.drawBoundingBoxBottomBlockPosNorth(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    EvoTessellator.drawBoundingBoxBottomBlockPosSouth(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                }
+                if (!(HoleUtil.isObiNorthHole(block) && HoleUtil.isObiSouthHole(block.south())) && !(HoleUtil.isObiEastHole(block) && HoleUtil.isObiWestHole(block.west())) && !(HoleUtil.isBedrockNorthHole(block) && HoleUtil.isBedrockSouthHole(block.south())) && !(HoleUtil.isBedrockEastHole(block) && HoleUtil.isBedrockWestHole(block.west()))) {
 
-        if(!mode.getValString().equalsIgnoreCase("Outline") && !mode.getValString().equalsIgnoreCase("OutlineBottom"))
-            EvoTessellator.prepare(GL11.GL_QUADS);
+                    if ((HoleUtil.isObiNorthHole(block) || HoleUtil.isBedrockNorthHole(block)) && (HoleUtil.isObiSouthHole(block.south()) || HoleUtil.isBedrockSouthHole(block.south()))) {
+                        //EvoTessellator.prepare(7);
+                        EvoTessellator.drawBoxBottom(block.south(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                        EvoTessellator.drawBoxBottom(block, rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                        //EvoTessellator.release();
+                        EvoTessellator.drawBoundingBoxBottomBlockPosNorth(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        EvoTessellator.drawBoundingBoxBottomBlockPosSouth(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.south(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                    }
 
-        safeHoles.forEach((blockPos, isBedrock) -> {
-            drawBox(blockPos, (int)r.getValDouble(), (int)g.getValDouble(), (int)b.getValDouble());
-        });
-
-        if(!mode.getValString().equalsIgnoreCase("Outline") && !mode.getValString().equalsIgnoreCase("OutlineBottom"))
-            EvoTessellator.release();
-
-    }
-
-    private void drawBox(BlockPos blockPos, int r, int g, int b) {
-        Color color;
-        Color c = Rainbow.getColor();
-        AxisAlignedBB bb = mc.world.getBlockState(blockPos).getSelectedBoundingBox(mc.world, blockPos);
-        if(rainbow.getValBoolean())
-            color = new Color(c.getRed(), c.getGreen(), c.getBlue(), (int)a.getValDouble());
-        else
-            color = new Color(r, g, b, (int)a.getValDouble());
-        if(mode.getValString().equalsIgnoreCase("Outline")){
-            EvoTessellator.drawBoundingBox(bb, width.getValInt(), color.getRGB());
-        } else if (mode.getValString().equalsIgnoreCase("Bottom")) {
-            EvoTessellator.drawBox(blockPos, color.getRGB(), GeometryMasks.Quad.DOWN);
-        } else if(mode.getValString().equalsIgnoreCase("OutlineBottom")){
-            EvoTessellator.drawBoundingBoxBottom(bb, width.getValInt(), color.getRGB());
-        } else {
-            EvoTessellator.drawBox(blockPos, color.getRGB(), GeometryMasks.Quad.ALL);
-        }
-    }
-
-    public List<BlockPos> getSphere(BlockPos loc, float r, int h, boolean hollow, boolean sphere, int plus_y) {
-        List<BlockPos> circleblocks = new ArrayList<>();
-        int cx = loc.getX();
-        int cy = loc.getY();
-        int cz = loc.getZ();
-        for (int x = cx - (int) r; x <= cx + r; x++) {
-            for (int z = cz - (int) r; z <= cz + r; z++) {
-                for (int y = (sphere ? cy - (int) r : cy); y < (sphere ? cy + r : cy + h); y++) {
-                    double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z) + (sphere ? (cy - y) * (cy - y) : 0);
-                    if (dist < r * r && !(hollow && dist < (r - 1) * (r - 1))) {
-                        BlockPos l = new BlockPos(x, y + plus_y, z);
-                        circleblocks.add(l);
+                    if ((HoleUtil.isObiEastHole(block) || HoleUtil.isBedrockEastHole(block)) && (HoleUtil.isObiWestHole(block.west()) || HoleUtil.isBedrockWestHole(block.west()))) {
+                        //EvoTessellator.prepare(7);
+                        EvoTessellator.drawBoxBottom(block.west(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                        EvoTessellator.drawBoxBottom(block, rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), alpha.getValInt());
+                        //EvoTessellator.release();
+                        EvoTessellator.drawBoundingBoxBottomBlockPosEast(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        EvoTessellator.drawBoundingBoxBottomBlockPosWest(block.west(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block, width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block.west(), width.getValInt(), rRock.getValInt(), gRock.getValInt(), bRock.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle(block.west(), width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
+                        if (fruitRender.getValBoolean()) EvoTessellator.drawBoundingBoxBottomBlockPosXInMiddle2(block, width.getValInt(), rObi.getValInt(), gObi.getValInt(), bObi.getValInt(), outlineAlpha.getValInt());
                     }
                 }
             }
         }
-        return circleblocks;
     }
 
-    public static BlockPos getPlayerPos() {
-        return new BlockPos(Math.floor(mc.player.posX), Math.floor(mc.player.posY), Math.floor(mc.player.posZ));
+
+
+
+
+
+
+
+    public void onEnable() {
     }
 
+    public void onDisable() {
+    }
 }
