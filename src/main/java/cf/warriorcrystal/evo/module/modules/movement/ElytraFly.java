@@ -29,7 +29,6 @@ public class ElytraFly extends Module {
 
     public ElytraFly() {
         super("ElytraFly", Category.MOVEMENT);
-
         Evo.getInstance().settingsManager.rSetting(speed = new Setting("Speed", this, 2, 0, 10, false));
         Evo.getInstance().settingsManager.rSetting(glide = new Setting("Glide", this, true));
         Evo.getInstance().settingsManager.rSetting(glideSpeed = new Setting("GlideSpeed", this, 1, 0, 2.5, false));

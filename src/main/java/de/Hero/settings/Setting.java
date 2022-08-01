@@ -12,38 +12,39 @@ import cf.warriorcrystal.evo.module.Module;
  *  @author HeroCode
  */
 public class Setting {
-	
+
 	private String name;
 	private Module parent;
 	private String mode;
-	
+
 	private String sval;
 	private ArrayList<String> options;
-	
+	private boolean value;
+
 	private boolean bval;
-	
+
 	private double dval;
 	private double min;
 	private double max;
 	private boolean onlyint = false;
-	
 
-	public Setting(String name, Module parent, String sval, ArrayList<String> options){
+
+	public Setting(String name, Module parent, String sval, ArrayList<String> options) {
 		this.name = name;
 		this.parent = parent;
 		this.sval = sval;
 		this.options = options;
 		this.mode = "Combo";
 	}
-	
-	public Setting(String name, Module parent, boolean bval){
+
+	public Setting(String name, Module parent, boolean bval) {
 		this.name = name;
 		this.parent = parent;
 		this.bval = bval;
 		this.mode = "Check";
 	}
-	
-	public Setting(String name, Module parent, double dval, double min, double max, boolean onlyint){
+
+	public Setting(String name, Module parent, double dval, double min, double max, boolean onlyint) {
 		this.name = name;
 		this.parent = parent;
 		this.dval = dval;
@@ -52,71 +53,72 @@ public class Setting {
 		this.onlyint = onlyint;
 		this.mode = "Slider";
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
-	
-	public Module getParentMod(){
+
+	public Module getParentMod() {
 		return parent;
 	}
-	
-	public String getValString(){
+
+	public String getValString() {
 		return this.sval;
 	}
-	
-	public void setValString(String in){
+
+	public void setValString(String in) {
 		this.sval = in;
 	}
-	
-	public ArrayList<String> getOptions(){
+
+	public ArrayList<String> getOptions() {
 		return this.options;
 	}
-	
-	public boolean getValBoolean(){
+
+	public boolean getValBoolean() {
 		return this.bval;
 	}
-	
-	public void setValBoolean(boolean in){
+
+	public void setValBoolean(boolean in) {
 		this.bval = in;
 	}
-	
-	public double getValDouble(){
-		if(this.onlyint){
-			this.dval = (int)dval;
+
+	public double getValDouble() {
+		if (this.onlyint) {
+			this.dval = (int) dval;
 		}
 		return this.dval;
 	}
 
-	public int getValInt(){
-		return (int)getValDouble();
+	public int getValInt() {
+		return (int) getValDouble();
 	}
 
-	public void setValDouble(double in){
+	public void setValDouble(double in) {
 		this.dval = in;
 	}
-	
-	public double getMin(){
+
+	public double getMin() {
 		return this.min;
 	}
-	
-	public double getMax(){
+
+	public double getMax() {
 		return this.max;
 	}
-	
-	public boolean isCombo(){
+
+	public boolean isCombo() {
 		return this.mode.equalsIgnoreCase("Combo");
 	}
-	
-	public boolean isCheck(){
+
+	public boolean isCheck() {
 		return this.mode.equalsIgnoreCase("Check");
 	}
-	
-	public boolean isSlider(){
+
+	public boolean isSlider() {
 		return this.mode.equalsIgnoreCase("Slider");
 	}
-	
-	public boolean onlyInt(){
+
+	public boolean onlyInt() {
 		return this.onlyint;
 	}
+
 }

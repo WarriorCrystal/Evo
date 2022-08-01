@@ -26,14 +26,13 @@ public class ModuleManager {
         //Combat
         addMod(new KillAura());
         addMod(new AutoCrystal());
-        addMod(new PVPBot());
-        addMod(new AutoHeadCrystal());
+       // addMod(new PVPBot());
         addMod(new Surround());
         addMod(new AutoOffhand());
         addMod(new AutoTrap());
         addMod(new AntiChainPop());
         addMod(new HoleFill());
-        addMod(new BlockLag());
+        addMod(new Burrow());
         addMod(new Criticals());
         addMod(new SmartOffhand());
 
@@ -50,12 +49,14 @@ public class ModuleManager {
 
 
         //Movement
+        addMod(new Anchor());
         addMod(new Sprint());
         addMod(new Velocity());
         addMod(new NoPush());
         addMod(new GuiMove());
         addMod(new ElytraFly());
         addMod(new NoSlow());
+        addMod(new AutoReplenish());
         addMod(new Speed());
     //    addMod(new Jesus());
 
