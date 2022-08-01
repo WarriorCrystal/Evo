@@ -26,7 +26,6 @@ public class ModuleManager {
         //Combat
         addMod(new KillAura());
         addMod(new AutoCrystal());
-        addMod(new AutoCrystalNew());
         addMod(new PVPBot());
         addMod(new AutoHeadCrystal());
         addMod(new Surround());
@@ -57,7 +56,6 @@ public class ModuleManager {
         addMod(new GuiMove());
         addMod(new ElytraFly());
         addMod(new NoSlow());
-        addMod(new NoSlow2b());
         addMod(new Speed());
     //    addMod(new Jesus());
 
