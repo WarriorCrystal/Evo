@@ -17,7 +17,6 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-
 public class Burrow
         extends Module {
     private BlockPos originalPos;

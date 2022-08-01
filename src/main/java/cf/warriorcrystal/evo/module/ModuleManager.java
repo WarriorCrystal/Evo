@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class ModuleManager {
     public static ArrayList<Module> modules;
-
     public ModuleManager(){
         modules = new ArrayList<>();
         //Combat

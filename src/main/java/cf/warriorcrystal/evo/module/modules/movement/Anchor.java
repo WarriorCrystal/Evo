@@ -9,7 +9,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
-
 public class Anchor
         extends Module {
     Setting pull;
