@@ -58,7 +58,7 @@ public class SmartOffhand extends Module {
         Evo.getInstance().settingsManager.rSetting(TotemOnElytra = new Setting("TotemOnElytra", this, true));
         Evo.getInstance().settingsManager.rSetting(OffhandGapOnSword = new Setting("SwordGap", this, true));
         Evo.getInstance().settingsManager.rSetting(OffhandStrNoStrSword = new Setting("StrIfNoStr", this, false));
-        Evo.getInstance().settingsManager.rSetting(HotbarFirst = new Setting("HorbarFirst", this, false));
+        Evo.getInstance().settingsManager.rSetting(HotbarFirst = new Setting("HotbarFirst", this, false));
     }
 
     public void onUpdate() {
@@ -89,7 +89,7 @@ public class SmartOffhand extends Module {
         }
         
         /// If we meet the required health
-        SwitchOffHandIfNeed(Mode.getValString());
+        SwitchOffHandIfNeed(Mode.getValString().toString());
     }
 
     private void SwitchOffHandIfNeed(String p_Val)
