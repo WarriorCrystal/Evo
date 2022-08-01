@@ -71,6 +71,7 @@ public class ModuleManager {
         addMod(new DeathWaypoint());
         addMod(new ClinetTimer());
         addMod(new TotemPopCounter());
+        addMod(new AutoSalDupe());
 
 
         //Chat
