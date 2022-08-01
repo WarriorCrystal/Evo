@@ -1,10 +1,10 @@
 package cf.warriorcrystal.evo.util.salhack;
 
-public final class SalTimer
+public final class Timer
 {
     private long time;
 
-    public SalTimer()
+    public Timer()
     {
         time = -1;
     }

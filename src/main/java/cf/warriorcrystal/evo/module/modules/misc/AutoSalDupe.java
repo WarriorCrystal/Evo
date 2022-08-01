@@ -6,7 +6,7 @@ import org.lwjgl.input.Keyboard;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.module.Module;
-import cf.warriorcrystal.evo.util.salhack.SalTimer;
+import cf.warriorcrystal.evo.util.salhack.Timer;
 
 import de.Hero.settings.Setting;
 
@@ -50,7 +50,7 @@ public class AutoSalDupe extends Module {
     private int itemsDropped;
 
     private GuiScreenHorseInventory l_Chest;
-    private final SalTimer timer = new SalTimer(); //How long to wait.
+    private final Timer timer = new Timer(); //How long to wait.
 
     private boolean noBypass = false;
 
