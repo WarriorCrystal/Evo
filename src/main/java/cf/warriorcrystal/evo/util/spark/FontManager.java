@@ -17,10 +17,10 @@ public class FontManager implements MC {
     private GameFontRenderer font = new GameFontRenderer(new Font(fontName, Font.PLAIN, fontSize), true, false);
     private GameFontRenderer largeFont = new GameFontRenderer(new Font(fontName, Font.PLAIN, 27), true, false);
     private GameFontRenderer badaboom = new GameFontRenderer(getClientFont("badaboom.ttf", 17), true, false);
-    private GameFontRenderer newfont = new GameFontRenderer(getClientFont("Yaahowu.ttf", 17), true, false);
-    private GameFontRenderer newfontbold = new GameFontRenderer(getClientFont("Yaahowu Bold.ttf", 17), true, false);
-    private GameFontRenderer newfontitalic = new GameFontRenderer(getClientFont("Yaahowu Italic.ttf", 17), true, false);
-    private GameFontRenderer newfontbolditalic = new GameFontRenderer(getClientFont("Yaahowu Bold Italic.ttf", 17), true, false);
+    private GameFontRenderer newfont = new GameFontRenderer(getClientFont("Yaahowu.ttf", 21), true, false);
+    private GameFontRenderer newfontbold = new GameFontRenderer(getClientFont("Yaahowu Bold.ttf", 21), true, false);
+    private GameFontRenderer newfontitalic = new GameFontRenderer(getClientFont("Yaahowu Italic.ttf", 21), true, false);
+    private GameFontRenderer newfontbolditalic = new GameFontRenderer(getClientFont("Yaahowu Bold Italic.ttf", 21), true, false);
 
     public void setFont() {
         this.font = new GameFontRenderer(new Font(fontName, Font.PLAIN, fontSize), true, false);
