@@ -33,7 +33,7 @@ public class FontManager implements MC {
     }
 
     public GameFontRenderer getCFont() {
-       return EventProcessor.getCustomFont();
+       return newfont;
     }
 
     public GameFontRenderer getLargeFont() {

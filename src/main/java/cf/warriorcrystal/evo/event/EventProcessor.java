@@ -55,7 +55,6 @@ public class EventProcessor {
     Color c;
     int rgb;
     int speed = 2;
-    static GameFontRenderer font;
 
     public EventProcessor(){
         INSTANCE = this;
@@ -74,9 +73,6 @@ public class EventProcessor {
         return speed;
     }
 
-    public static GameFontRenderer getCustomFont() {
-        return font;
-    }
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
@@ -84,19 +80,6 @@ public class EventProcessor {
         c = Color.getHSBColor(hue, 1f, 1f);
         rgb = Color.HSBtoRGB(hue, 1f, 1f);
         hue += speed / 2000f;
-        //cfont
-        switch (((CustomFontModule)ModuleManager.getModuleByName("CustomFont")).Mode.getValString()) {
-            case "Normal":
-            font = FontManager.newfont;
-            case "Bold":
-            font = FontManager.newfontbold;
-            case "Italic":
-            font = FontManager.newfontitalic;
-            case "ItalicBold":
-            font = FontManager.newfontbolditalic;
-            default:
-            break;
-       }
         //Module onUpdate
         if (mc.player != null)
             ModuleManager.onUpdate();
