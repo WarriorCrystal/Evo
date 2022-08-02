@@ -38,7 +38,7 @@ public class BpsComponent extends Panel {
         final double deltaZ = mc.player.posZ - mc.player.prevPosZ;
         final float tickRate = (mc.timer.tickLength / 1000.0f);
         final String bps = df.format((MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ) / tickRate)) + " BPS";
-        if(font) Evo.fontRenderer.drawStringWithShadow(bps, (float)x, (float)y, text.getRGB());
+        if(font) Evo.fontManager.getCFont().drawText(bps, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(bps, (float)x, (float)y, text.getRGB());
     }
 
@@ -64,7 +64,7 @@ public class BpsComponent extends Panel {
         if(extended) {
             double startY = y + height;
             Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if (font) Evo.fontRenderer.drawStringWithShadow(bps, (float) x, (float) startY, text.getRGB());
+            if (font) Evo.fontManager.getCFont().drawText(bps, (float) x, (float) startY, text.getRGB());
             else mc.fontRenderer.drawStringWithShadow(bps, (float) x, (float) startY, text.getRGB());
         }
     }

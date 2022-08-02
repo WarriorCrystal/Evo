@@ -36,7 +36,7 @@ public class CoordsComponent extends Panel {
         Color c = new Color((int) mod.red.getValDouble(), (int) mod.green.getValDouble(), (int) mod.blue.getValDouble());
         if(mod.rainbow.getValBoolean()) c = Rainbow.getColor();
         if(font)
-            Evo.fontRenderer.drawStringWithShadow(getCoords(), (int) x, (int) y, c.getRGB());
+            Evo.fontManager.getCFont().drawText(getCoords(), (int) x, (int) y, c.getRGB());
         else
             mc.fontRenderer.drawStringWithShadow(getCoords(), (int) x, (int) y, c.getRGB());
     }
@@ -59,7 +59,7 @@ public class CoordsComponent extends Panel {
         if(extended) {
             double startY = y + height;
             Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if (font) Evo.fontRenderer.drawStringWithShadow(getCoords(), (float) x, (float) startY, text.getRGB());
+            if (font) Evo.fontManager.getCFont().drawText(getCoords(), (float) x, (float) startY, text.getRGB());
             else mc.fontRenderer.drawStringWithShadow(getCoords(), (float) x, (float) startY, text.getRGB());
         }
     }

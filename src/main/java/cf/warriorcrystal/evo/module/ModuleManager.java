@@ -138,6 +138,7 @@ public class ModuleManager {
         addMod(new Bps());
         addMod(new PotionEffects());
         addMod(new NotificationsHud());
+        addMod(new CustomFontModule());
     }
 
     public static void addMod(Module m){

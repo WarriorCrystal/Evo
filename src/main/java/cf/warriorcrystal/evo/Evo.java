@@ -22,6 +22,7 @@ import cf.warriorcrystal.evo.util.CapeUtils;
 import cf.warriorcrystal.evo.util.ConfigUtils;
 import cf.warriorcrystal.evo.util.TpsUtils;
 import cf.warriorcrystal.evo.util.font.CFontRenderer;
+import cf.warriorcrystal.evo.util.spark.FontManager;
 import cf.warriorcrystal.evo.waypoint.WaypointManager;
 
 import java.awt.*;
@@ -31,6 +32,8 @@ public class Evo {
     public static final String MODID = "evo";
     public static final String MODNAME = "Evo";
     public static final String MODVER = "1.0.1";
+
+    public static final FontManager fontManager = new FontManager();
 
     public static final Logger log = LogManager.getLogger(MODNAME);
     public ClickGUI clickGui;

@@ -37,7 +37,7 @@ public class TotemsComponent extends Panel {
 
     public void drawHud(){
         doStuff();
-        if(font) Evo.fontRenderer.drawStringWithShadow(tot, (float)x, (float)y, text.getRGB());
+        if(font) Evo.fontManager.getCFont().drawText(tot, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(tot, (float)x, (float)y, text.getRGB());
     }
 
@@ -59,7 +59,7 @@ public class TotemsComponent extends Panel {
         if(extended) {
             double startY = y + height;
             Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if (font) Evo.fontRenderer.drawStringWithShadow(tot, (float) x, (float) startY, text.getRGB());
+            if (font) Evo.fontManager.getCFont().drawText(tot, (float) x, (float) startY, text.getRGB());
             else mc.fontRenderer.drawStringWithShadow(tot, (float) x, (float) startY, text.getRGB());
         }
     }

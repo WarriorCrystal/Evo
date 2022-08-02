@@ -90,7 +90,7 @@ public class PvpinfoComponent extends Panel {
     }
 
     private void drawText(String s, int x, int y, int c){
-        if(font) Evo.fontRenderer.drawStringWithShadow(s, x ,y, c);
+        if(font) Evo.fontManager.getCFont().drawText(s, x ,y, c);
         else mc.fontRenderer.drawStringWithShadow(s, x, y, c);
     }
 

@@ -83,7 +83,7 @@ public class ModList extends Module {
 
     private void drawStringWithShadow(String text, int x, int y, int color){
         if(customFont.getValBoolean())
-            Evo.fontRenderer.drawStringWithShadow(text, x, y, color);
+            Evo.fontManager.getCFont().drawText(text, x, y, color);
         else
             mc.fontRenderer.drawStringWithShadow(text, x, y, color);
     }

@@ -35,7 +35,7 @@ public class PingComponent extends Panel {
     public void drawHud(){
         doStuff();
         String ping = mod.getPing() + "ms";
-        if(font) Evo.fontRenderer.drawStringWithShadow(ping, (float)x, (float)y, text.getRGB());
+        if(font) Evo.fontManager.getCFont().drawText(ping, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(ping, (float)x, (float)y, text.getRGB());
     }
 
@@ -58,7 +58,7 @@ public class PingComponent extends Panel {
         if(extended) {
             double startY = y + height;
             Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if (font) Evo.fontRenderer.drawStringWithShadow(ping, (float) x, (float) startY, text.getRGB());
+            if (font) Evo.fontManager.getCFont().drawText(ping, (float) x, (float) startY, text.getRGB());
             else mc.fontRenderer.drawStringWithShadow(ping, (float) x, (float) startY, text.getRGB());
         }
     }

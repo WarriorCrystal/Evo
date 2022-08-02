@@ -71,7 +71,7 @@ public class PotionEffects extends Module {
     }
 
     private void drawText(String s, int x, int y, int color){
-        if(customFont.getValBoolean())Evo.fontRenderer.drawStringWithShadow(s, x, y, color);
+        if(customFont.getValBoolean())Evo.fontManager.getCFont().drawText(s, x, y, color);
         else mc.fontRenderer.drawStringWithShadow(s, x, y, color);
     }
 

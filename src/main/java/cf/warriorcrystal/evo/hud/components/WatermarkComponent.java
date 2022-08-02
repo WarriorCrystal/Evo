@@ -33,7 +33,7 @@ public class WatermarkComponent extends Panel {
     public void drawHud(){
         doStuff();
         String s = Evo.MODNAME + " " + Evo.MODVER;
-        if(font) Evo.fontRenderer.drawStringWithShadow(s, (float)x, (float)y, text.getRGB());
+        if(font) Evo.fontManager.getCFont().drawText(s, (float)x, (float)y, text.getRGB());
         else mc.fontRenderer.drawStringWithShadow(s, (float)x, (float)y, text.getRGB());
     }
 
@@ -56,7 +56,7 @@ public class WatermarkComponent extends Panel {
         if(extended) {
             double startY = y + height;
             Gui.drawRect((int) x, (int) startY, (int) x + (int) width, (int) startY + (int) height, c.getRGB());
-            if (font) Evo.fontRenderer.drawStringWithShadow(s, (float) x, (float) startY, text.getRGB());
+            if (font) Evo.fontManager.getCFont().drawText(s, (float) x, (float) startY, text.getRGB());
             else mc.fontRenderer.drawStringWithShadow(s, (float) x, (float) startY, text.getRGB());
         }
     }

@@ -7,13 +7,20 @@ import java.awt.*;
 import java.io.InputStream;
 import java.util.Locale;
 
+import cf.warriorcrystal.evo.module.ModuleManager;
+import cf.warriorcrystal.evo.module.modules.gui.CustomFontModule;
+
 public class FontManager implements MC {
     private final String[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames(Locale.ENGLISH);
     public String fontName = "Tahoma";
     public int fontSize = 17;
     private GameFontRenderer font = new GameFontRenderer(new Font(fontName, Font.PLAIN, fontSize), true, false);
     private GameFontRenderer largeFont = new GameFontRenderer(new Font(fontName, Font.PLAIN, 27), true, false);
-    private GameFontRenderer badaboom = new GameFontRenderer(getClientFont("badaboom.ttf", 27), true, false);
+    private GameFontRenderer badaboom = new GameFontRenderer(getClientFont("badaboom.ttf", 17), true, false);
+    private GameFontRenderer newfont = new GameFontRenderer(getClientFont("Yaahowu.ttf", 17), true, false);
+    private GameFontRenderer newfontbold = new GameFontRenderer(getClientFont("Yaahowu Bold.ttf", 17), true, false);
+    private GameFontRenderer newfontitalic = new GameFontRenderer(getClientFont("Yaahowu Italic.ttf", 17), true, false);
+    private GameFontRenderer newfontbolditalic = new GameFontRenderer(getClientFont("Yaahowu Bold Italic.ttf", 17), true, false);
 
     public void setFont() {
         this.font = new GameFontRenderer(new Font(fontName, Font.PLAIN, fontSize), true, false);
@@ -22,6 +29,22 @@ public class FontManager implements MC {
 
     public GameFontRenderer getBadaboom() {
         return this.badaboom;
+    }
+
+    public GameFontRenderer getCFont() {
+       switch (((CustomFontModule)ModuleManager.getModuleByName("CustomFont")).Mode.getValString()) {
+            case "Normal":
+            return newfont;
+            case "Bold":
+            return newfontbold;
+            case "Italic":
+            return newfontitalic;
+            case "ItalicBold":
+            return newfontbolditalic;
+            default:
+            break;
+       }
+       return newfont;
     }
 
     public GameFontRenderer getLargeFont() {
