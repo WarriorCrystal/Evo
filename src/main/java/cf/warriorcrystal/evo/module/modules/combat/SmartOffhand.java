@@ -1,23 +1,15 @@
 package cf.warriorcrystal.evo.module.modules.combat;
 
 import de.Hero.settings.Setting;
-import net.minecraft.client.gui.inventory.GuiContainer;
+
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.settings.HotbarSnapshot;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityEnderCrystal;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.module.Module;
@@ -42,6 +34,7 @@ public class SmartOffhand extends Module {
     Setting OffhandGapOnSword;
     Setting OffhandStrNoStrSword;
     Setting HotbarFirst;
+    
 
     public void setup(){
         ArrayList<String> items = new ArrayList<>();
@@ -67,14 +60,14 @@ public class SmartOffhand extends Module {
         
         if (!mc.player.getHeldItemMainhand().isEmpty())
         {
-            if ((float) health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandStrNoStrSword.getValBoolean() && !mc.player.isPotionActive(MobEffects.STRENGTH))
+            if ((float)health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandStrNoStrSword.getValBoolean() && !mc.player.isPotionActive(MobEffects.STRENGTH))
             {
                 SwitchOffHandIfNeed("Strength");
                 return;
             }
             
             /// Sword override
-            if ((float) health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandGapOnSword.getValBoolean())
+            if ((float)health.getValDouble() <= PlayerUtil.GetHealthWithAbsorption() && mc.player.getHeldItemMainhand().getItem() instanceof ItemSword && OffhandGapOnSword.getValBoolean())
             {
                 SwitchOffHandIfNeed("Gap");
                 return;
@@ -82,14 +75,14 @@ public class SmartOffhand extends Module {
         }
         
         /// First check health, most important as we don't want to die for no reason.
-        if ((float) health.getValDouble() > PlayerUtil.GetHealthWithAbsorption() || Mode.getValString() == "Totem" || (TotemOnElytra.getValBoolean() && mc.player.isElytraFlying()) || (mc.player.fallDistance >= (float) FallDistance.getValDouble() && !mc.player.isElytraFlying()))
+        if ((float)health.getValDouble() > PlayerUtil.GetHealthWithAbsorption() || Mode.getValString() == "Totem" || (TotemOnElytra.getValBoolean() && mc.player.isElytraFlying()) || (mc.player.fallDistance >= (float) FallDistance.getValDouble() && !mc.player.isElytraFlying()))
         {
             SwitchOffHandIfNeed("Totem");
             return;
         }
         
         /// If we meet the required health
-        SwitchOffHandIfNeed(Mode.getValString().toString());
+        SwitchOffHandIfNeed(Mode.getValString());
     }
 
     private void SwitchOffHandIfNeed(String p_Val)
