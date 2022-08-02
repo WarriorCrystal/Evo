@@ -74,7 +74,7 @@ public class FontManager implements MC {
 
     private static Font getClientFont(final String fontName, final float size) {
         try {
-            final InputStream inputStream = FontManager.class.getResourceAsStream("/assets/evo/textures/fonts " + fontName);
+            final InputStream inputStream = FontManager.class.getResourceAsStream("/assets/evo/textures/fonts/" + fontName);
             Font awtClientFont = Font.createFont(0, inputStream);
             awtClientFont = awtClientFont.deriveFont(0, size);
             inputStream.close();
