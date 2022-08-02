@@ -33,7 +33,7 @@ public class Evo {
     public static final String MODNAME = "Evo";
     public static final String MODVER = "1.0.1";
 
-    public static final FontManager fontManager = new FontManager();
+    public static FontManager fontManager;
 
     public static final Logger log = LogManager.getLogger(MODNAME);
     public ClickGUI clickGui;
@@ -66,6 +66,8 @@ public class Evo {
     public void init(FMLInitializationEvent event){
         eventProcessor = new EventProcessor();
         eventProcessor.init();
+
+        fontManager = new FontManager();
         fontRenderer = new CFontRenderer(new Font("Arial", Font.PLAIN, 20), true, false);
         TpsUtils tpsUtils = new TpsUtils();
 
