@@ -10,6 +10,9 @@ import cf.warriorcrystal.evo.event.events.PlayerJoinEvent;
 import cf.warriorcrystal.evo.event.events.PlayerLeaveEvent;
 import cf.warriorcrystal.evo.hud.HudComponentManager;
 import cf.warriorcrystal.evo.module.ModuleManager;
+import cf.warriorcrystal.evo.util.spark.FontManager;
+import cf.warriorcrystal.evo.util.spark.GameFontRenderer;
+import cf.warriorcrystal.evo.module.modules.gui.CustomFontModule;
 import de.Hero.clickgui.ClickGUI;
 import de.Hero.clickgui.Panel;
 import me.zero.alpine.listener.EventHandler;
@@ -52,6 +55,7 @@ public class EventProcessor {
     Color c;
     int rgb;
     int speed = 2;
+    static GameFontRenderer font;
 
     public EventProcessor(){
         INSTANCE = this;
@@ -70,12 +74,29 @@ public class EventProcessor {
         return speed;
     }
 
+    public static GameFontRenderer getCustomFont() {
+        return font;
+    }
+
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         //rainbow stuff
         c = Color.getHSBColor(hue, 1f, 1f);
         rgb = Color.HSBtoRGB(hue, 1f, 1f);
         hue += speed / 2000f;
+        //cfont
+        switch (((CustomFontModule)ModuleManager.getModuleByName("CustomFont")).Mode.getValString()) {
+            case "Normal":
+            font = FontManager.newfont;
+            case "Bold":
+            font = FontManager.newfontbold;
+            case "Italic":
+            font = FontManager.newfontitalic;
+            case "ItalicBold":
+            font = FontManager.newfontbolditalic;
+            default:
+            break;
+       }
         //Module onUpdate
         if (mc.player != null)
             ModuleManager.onUpdate();
