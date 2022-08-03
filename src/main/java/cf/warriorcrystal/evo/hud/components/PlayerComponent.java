@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.GlStateManager;
 
 import java.awt.*;
 
+import cf.warriorcrystal.evo.Evo;
+
 public class PlayerComponent extends Panel {
     public PlayerComponent(double ix, double iy, ClickGUI parent) {
         super("Player", ix, iy, 10, 10, false, parent);
