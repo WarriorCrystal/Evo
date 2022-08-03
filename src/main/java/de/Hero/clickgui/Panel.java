@@ -78,7 +78,7 @@ public class Panel {
 		if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("New")){
 			Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff121212);
 			Gui.drawRect((int)x - 2, (int)y, (int)x, (int)y + (int)height, outlineColor);
-			FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffefefef);
+			Evo.fontManager.getCFont().drawText(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffefefef);
 		}else if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("JellyLike")){
 			Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, 0xff121212);
 			Gui.drawRect((int)x + 4,			(int)y + 2, (int)x + (int)4.3, 		(int)y + (int)height - 2, 0xffaaaaaa);
@@ -93,7 +93,7 @@ public class Panel {
 		}else if(Evo.getInstance().settingsManager.getSettingByName("Design").getValString().equalsIgnoreCase("Windows")){
 			Gui.drawRect((int)x - 2, (int)y - 2, (int)x + (int)width + 2, (int)y + (int)height + 2, Color.GRAY.getRGB());
 			Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, Color.BLUE.darker().darker().darker().getRGB());
-			FontUtil.drawStringWithShadow(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffffffff);
+			Evo.fontManager.getCFont().drawText(title, x + 2, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffffffff);
 		}
 		if (this.extended && !Elements.isEmpty()) {
 			double startY = y + height;

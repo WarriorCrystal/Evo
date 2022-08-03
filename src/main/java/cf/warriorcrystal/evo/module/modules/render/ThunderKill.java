@@ -24,13 +24,13 @@ public class ThunderKill extends Module {
     Setting soundAmount;
 
     public void setup(){
-        thunder = new Setting("tkThunder", this, true);
+        thunder = new Setting("Thunder", this, true);
         Evo.getInstance().settingsManager.rSetting(thunder);
-        thunderAmount = new Setting("tkThunders", this, 1, 1, 10, true);
+        thunderAmount = new Setting("Thunders", this, 1, 1, 10, true);
         Evo.getInstance().settingsManager.rSetting(thunderAmount);
-        sound = new Setting("tkSound", this, true);
+        sound = new Setting("Sound", this, true);
         Evo.getInstance().settingsManager.rSetting(sound);
-        soundAmount = new Setting("tkSounds", this, 1, 1, 10, true);
+        soundAmount = new Setting("Sounds", this, 1, 1, 10, true);
         Evo.getInstance().settingsManager.rSetting(soundAmount);
     }
 

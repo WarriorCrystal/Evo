@@ -51,7 +51,7 @@ public class WatermarkComponent extends Panel {
         this.width = w;
         this.height = FontUtil.getFontHeight() + 2;
         Gui.drawRect((int)x, (int)y, (int)x + (int)width, (int)y + (int)height, c.getRGB());
-        FontUtil.drawStringWithShadow(title, x, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffffffff);
+        Evo.fontManager.getCFont().drawText(title, x, y + height / 2 - FontUtil.getFontHeight()/2f, 0xffffffff);
 
         if(extended) {
             double startY = y + height;

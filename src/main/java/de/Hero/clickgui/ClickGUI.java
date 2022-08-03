@@ -114,7 +114,7 @@ public class ClickGUI extends GuiScreen {
 		/*															*/ ScaledResolution s = new ScaledResolution(mc);
   		/* DO NOT REMOVE											*/ GL11.glPushMatrix();
 		/* copyright HeroCode 2017									*/ GL11.glTranslated(s.getScaledWidth(), s.getScaledHeight(), 0);GL11.glScaled(0.5, 0.5, 0.5);
-		/* https://www.youtube.com/channel/UCJum3PIbnYvIfIEu05GL_yQ	*/ //FontUtil.drawStringWithShadow("b"+"y"+ "H"+"e"+"r"+"o"+"C"+"o"+"d"+"e", -Minecraft.getMinecraft().fontRenderer.getStringWidth("b"+"y"+ "H"+"e"+"r"+"o"+"C"+"o"+"d"+"e"), -Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT, 0xff11F86B);
+		/* https://www.youtube.com/channel/UCJum3PIbnYvIfIEu05GL_yQ	*/ //Evo.fontManager.getCFont().drawText("b"+"y"+ "H"+"e"+"r"+"o"+"C"+"o"+"d"+"e", -Minecraft.getMinecraft().fontRenderer.getStringWidth("b"+"y"+ "H"+"e"+"r"+"o"+"C"+"o"+"d"+"e"), -Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT, 0xff11F86B);
 		/*															*/ GL11.glPopMatrix();
 		
 		mb = null;
