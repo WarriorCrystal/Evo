@@ -2,12 +2,15 @@ package cf.warriorcrystal.evo.module.modules.render;
 
 import cf.warriorcrystal.evo.Evo;
 import cf.warriorcrystal.evo.event.events.PacketEvent;
+import cf.warriorcrystal.evo.event.events.RenderEvent;
 import cf.warriorcrystal.evo.module.Module;
 import cf.warriorcrystal.evo.util.EvoTessellator;
 import cf.warriorcrystal.evo.util.Rainbow;
 import cf.warriorcrystal.evo.util.TotemPopChams;
 import com.mojang.authlib.GameProfile;
 import de.Hero.settings.Setting;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelPlayer;
@@ -68,7 +71,8 @@ public class PopChams extends Module {
     double alphaLine;
     //
 
-    public void onUpdate(PacketEvent.Receive event) {
+    @EventHandler
+    private Listener<PacketEvent.Receive> packetReceiveListener = new Listener<>(event -> {
         if (event.getPacket() instanceof SPacketEntityStatus) {
             final SPacketEntityStatus packet = (SPacketEntityStatus) event.getPacket();
             if (packet.getOpCode() == 35 && packet.getEntity(PopChams.mc.world) != null && (self.getValBoolean() || packet.getEntity(PopChams.mc.world).getEntityId() != PopChams.mc.player.getEntityId())) {
@@ -92,9 +96,9 @@ public class PopChams extends Module {
 
             }
         }
-    }
+    });
 
-    @Override
+
     public void onUpdate() {
         if (rainbow.getValBoolean()) {
             Rainbow.settingRainbow(rF, gF, bF);
@@ -103,9 +107,7 @@ public class PopChams extends Module {
         }
     }
 
-
-    @SubscribeEvent
-    public void onRenderWorld(final RenderWorldLastEvent event) {
+    public void onWorldRender(RenderEvent event){
         if (onlyOneEsp.getValBoolean()) {
             if (player == null || mc.world == null || mc.player == null) {
                 return;
@@ -146,6 +148,14 @@ public class PopChams extends Module {
                 EvoTessellator.releaseGL();
             }
         }
+    }
+
+    public void onEnable() {
+        Evo.EVENT_BUS.subscribe(this);
+    }
+    
+    public void onDisable() {
+        Evo.EVENT_BUS.unsubscribe(this);
     }
 
     double normalize(final double value, final double min, final double max) {
