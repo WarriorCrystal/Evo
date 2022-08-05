@@ -80,6 +80,7 @@ public class ModuleManager {
         addMod(new TotemPopCounter());
         addMod(new AutoSalDupe());
         addMod(new AutoWither());
+        addMod(new DLCoordExploit());
 
 
         //Chat
