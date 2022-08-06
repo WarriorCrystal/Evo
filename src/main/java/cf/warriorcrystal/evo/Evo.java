@@ -22,6 +22,7 @@ import cf.warriorcrystal.evo.util.CapeUtils;
 import cf.warriorcrystal.evo.util.ConfigUtils;
 import cf.warriorcrystal.evo.util.TpsUtils;
 import cf.warriorcrystal.evo.util.font.CFontRenderer;
+import cf.warriorcrystal.evo.util.salhack.CapeManager;
 import cf.warriorcrystal.evo.util.spark.FontManager;
 import cf.warriorcrystal.evo.waypoint.WaypointManager;
 
@@ -46,6 +47,7 @@ public class Evo {
     EventProcessor eventProcessor;
     public WaypointManager waypointManager;
     public static CFontRenderer fontRenderer;
+    private static CapeManager m_CapeManager = new CapeManager();
 
     public static final EventBus EVENT_BUS = new EventManager();
 
@@ -115,6 +117,11 @@ public class Evo {
 
     public static Evo getInstance(){
         return INSTANCE;
+    }
+
+    public static CapeManager GetCapeManager()
+    {
+        return m_CapeManager;
     }
 
 }
