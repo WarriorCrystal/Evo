@@ -59,4 +59,9 @@ public class RPC {
             return;
         }, "Discord-RPC-Callback-Handler").start();
     }
+
+    public static void shutdown() {
+        rpc.Discord_Shutdown();
+    }
+
 }

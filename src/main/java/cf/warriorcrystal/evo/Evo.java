@@ -112,6 +112,10 @@ public class Evo {
         //WelcomeWindow ww = new WelcomeWindow();
         //ww.setVisible(false);
         log.info("PostInitialization complete!\n");
+
+        if (ModuleManager.isModuleEnabled("RichPresence")) {
+            RPC.init();
+        }
     }
 
     public static Evo getInstance(){
