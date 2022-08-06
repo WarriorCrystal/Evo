@@ -106,7 +106,7 @@ public class CapeManager
     public void DownloadCapeFromLocationWithName(String p_Link, String p_Name) throws MalformedURLException, IOException
     {
         final DynamicTexture l_Texture = new DynamicTexture(ImageIO.read(new URL(p_Link)));
-        Capes.put(p_Name, Wrapper.GetMC().getTextureManager().getDynamicTextureLocation("salhack/capes", l_Texture));
+        Capes.put(p_Name, Wrapper.GetMC().getTextureManager().getDynamicTextureLocation("evo/textures", l_Texture));
     }
 
     @EventHandler
