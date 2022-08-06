@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import cf.warriorcrystal.evo.Evo;
-import cf.warriorcrystal.evo.event.events.EventPlayerGetLocationCape;
 import cf.warriorcrystal.evo.module.ModuleManager;
 
 import javax.annotation.Nullable;
@@ -20,16 +19,12 @@ import java.util.UUID;
 public abstract class MixinAbstractClientPlayer {
     @Shadow @Nullable protected abstract NetworkPlayerInfo getPlayerInfo();
 
-    @Inject(method = "getLocationCape", at = @At(value = "RETURN"), cancellable = true)
-    public void getCape(CallbackInfoReturnable<ResourceLocation> callbackInfo)
-    {
-        EventPlayerGetLocationCape l_Event = new EventPlayerGetLocationCape((AbstractClientPlayer)(Object)this);
-        Evo.EVENT_BUS.post(l_Event);
+    @Inject(method = "getLocationCape", at = @At("HEAD"), cancellable = true)
+    public void getLocationCape(CallbackInfoReturnable<ResourceLocation> cir){
+        UUID uuid = getPlayerInfo().getGameProfile().getId();
 
-        if (l_Event.isCancelled())
-        {
-            // p_Callback.cancel();
-            callbackInfo.setReturnValue(l_Event.GetResourceLocation());
+        if(ModuleManager.isModuleEnabled("Capes") && Evo.getInstance().capeUtils.hasCape(uuid)) {
+            cir.setReturnValue(new ResourceLocation("evo:textures/cape.png"));
         }
     }
 }
