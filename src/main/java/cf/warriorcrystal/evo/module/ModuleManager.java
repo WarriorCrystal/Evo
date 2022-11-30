@@ -81,6 +81,7 @@ public class ModuleManager {
         addMod(new AutoSalDupe());
         addMod(new AutoWither());
         addMod(new DLCoordExploit());
+        addMod(new AutoFrameDupe());
 
 
         //Chat
