@@ -1,2 +1,2 @@
 # Evo
-Dead client, i don't even play anymore
+estoy jugando cuando estoy al pedo asi q le voy a meter algunas cosas
